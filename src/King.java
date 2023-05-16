@@ -2,8 +2,11 @@ public class King extends Piece{
     //Current square position
     String name = "King";
 
+    public King(int c) {
+        color = c;
+    }
+
     public boolean canMove(int x, int y) {
-        System.out.println(curX);
         return true;
     }
 
@@ -23,6 +26,17 @@ public class King extends Piece{
 
         return false;
     }
+
+    /*public String getColor() {
+        if (color == 1) {
+            return "White";
+        }
+        return "Black";
+    }
+
+    public int getColorInt() {
+        return color;
+    }*/
 
     public String getName() {
         return name;
