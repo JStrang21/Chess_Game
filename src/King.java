@@ -2,6 +2,12 @@ public class King extends Piece{
     //Current square position
     String name = "King";
 
+    public boolean canMove(int x, int y) {
+        System.out.println(curX);
+        return true;
+    }
+
+
     public boolean traceMovement() {
         return false;
     }
@@ -18,6 +24,9 @@ public class King extends Piece{
         return false;
     }
 
+    public String getName() {
+        return name;
+    }
     public void printPiece() {
         System.out.println();
     }

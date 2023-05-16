@@ -1,21 +1,25 @@
 public class Square {
-    boolean isOccupied = false;
-    int color;
+    boolean isOccupied;
     Piece piece;
+
+    public Square() {
+        isOccupied = false;
+
+    }
+
 
     public void addPiece(Piece p) {
         //Square is occupied
-        piece = p;
+        this.piece = p;
         isOccupied = true;
     }
 
-    public Piece removePiece() {
-        //Create a temp piece so you can return what is being removed
+    public void removePiece() {
+        //Create a temp piece you can return what is being removed
         //Piece temp = new Piece();
         //Square is not occupied
         isOccupied = false;
-        //piece = null;
-        return piece;
+        piece = null;
     }
 
 }
