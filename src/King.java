@@ -1,8 +1,8 @@
 public class King extends Piece{
-    //Current square position
     String name = "King";
 
     public King(int c) {
+        //Constructor to specify color
         color = c;
     }
 
@@ -10,8 +10,15 @@ public class King extends Piece{
         return true;
     }
 
+    public String getName() {
+        return name;
+    }
 
-    public boolean traceMovement() {
+    /*public void printPiece() {
+        System.out.println();
+    }
+
+    *public boolean traceMovement() {
         return false;
     }
 
@@ -25,7 +32,7 @@ public class King extends Piece{
     boolean tracePath(int destX, int destY) {
 
         return false;
-    }
+    }*/
 
     /*public String getColor() {
         if (color == 1) {
@@ -37,11 +44,4 @@ public class King extends Piece{
     public int getColorInt() {
         return color;
     }*/
-
-    public String getName() {
-        return name;
-    }
-    public void printPiece() {
-        System.out.println();
-    }
 }

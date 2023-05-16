@@ -1,5 +1,5 @@
 public class Board {
-    //int 1 represents white && int 2 represents black
+    //8x8 Board of squares/chessboard
     public Square[][] board = new Square[8][8];
 
     public Board() {
@@ -101,21 +101,17 @@ public class Board {
 
 
     public Piece[] createPieces(Piece[] pieces, int color) {
-        pieces[0] = new King(color);
-        /*
-        pieces[0] = new Rook();
-        pieces[7] = new Rook();
-        pieces[1] = new Knight();
-        pieces[6] = new Knight();
-        pieces[2] = new Bishop();
-        pieces[5] = new Bishop();
-        pieces [3] = new Queen();
-        pieces[4] = new King();
+        pieces[0] = new Rook(color);
+        pieces[7] = new Rook(color);
+        pieces[1] = new Knight(color);
+        pieces[6] = new Knight(color);
+        pieces[2] = new Bishop(color);
+        pieces[5] = new Bishop(color);
+        pieces [3] = new Queen(color);
+        pieces[4] = new King(color);
         for (int i = 8; i < 16; i++) {
-            pieces[i] = new Pawn();
+            pieces[i] = new Pawn(color);
         }
-        */
-
 
         return pieces;
     }
