@@ -14,7 +14,7 @@ public abstract class Piece extends Square{
 
     abstract boolean canMove(int desX, int desY);
 
-    public void setCoordinates(int desX, int desY) {
+    public void setCoords(int desX, int desY) {
         curX = desX;
         curY = desY;
     }

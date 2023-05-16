@@ -26,14 +26,14 @@ public class Board {
 
             //Move target piece to dest square
             board[desX][desY].addPiece(targetPiece);
-            targetPiece.setCoordinates(desX, desY);
+            targetPiece.setCoords(desX, desY);
         }
         //If move is possible and no enemy piece on destination square
         else if (targetPiece.canMove(desX, desY) && !squareOccupied) {
             //Move piece to destination square
             board[desX][desY].addPiece(targetPiece);
             //Updated piece coords
-            targetPiece.setCoordinates(desX, desY);
+            targetPiece.setCoords(desX, desY);
             //Remove piece from previous square
             board[srcX][srcY].removePiece();
         }
@@ -67,31 +67,27 @@ public class Board {
 
         //Match pieces with correct squares on board: black on top white on bottom
         for (int i = 0; i < 8; i++) {
-            //Place rooks
-            if (i == 0 || i == 7) {
-                //board[0][i] = blackPieces[i];
-                //board[7][i] = whitePieces[i];
-            }
-            //Place knights
-            else if (i == 1 || i == 6) {
-                //board[0][i] = blackPieces[i];
-                //board[7][i] = whitePieces[i];
-            }
-            //Place bishops
-            else if (i == 2 || i == 5) {
-                //board[0][i] = blackPieces[i];
-                //board[7][i] = whitePieces[i];
-            }
-            //Place king and queen
-            else {
-                //board[0][i] = blackPieces[i];
-                //board[7][i] = whitePieces[i];
-            }
+            //Add piece to appropriate starting square
+            board[0][i].addPiece(whitePieces[i]);
+            //Set piece coordinates
+            whitePieces[i].setCoords(0, i);
+
+            //Add piece to appropriate starting square
+            board[7][i].addPiece(blackPieces[i]);
+            //Set piece coordinates
+            blackPieces[i].setCoords(7, i);
         }
         //Place pawns
         for (int i = 0; i < 8; i++) {
-            //board[1][i] = blackPieces[i + 8];
-            //board[6][i] = whitePieces[i + 8];
+            //Add piece to appropriate starting square
+            board[1][i].addPiece(whitePieces[i + 8]);
+            //Set piece coordinates
+            whitePieces[i + 8].setCoords(1, i);
+
+            //Add piece to appropriate starting square
+            board[6][i].addPiece(blackPieces[i + 8]);
+            //Set piece coordinates
+            blackPieces[i + 8].setCoords(6, i);
         }
 
 
@@ -99,16 +95,18 @@ public class Board {
 
     }
 
-
     public Piece[] createPieces(Piece[] pieces, int color) {
+        //Pieces added to array in order of board position
         pieces[0] = new Rook(color);
-        pieces[7] = new Rook(color);
         pieces[1] = new Knight(color);
-        pieces[6] = new Knight(color);
         pieces[2] = new Bishop(color);
-        pieces[5] = new Bishop(color);
         pieces [3] = new Queen(color);
         pieces[4] = new King(color);
+        pieces[5] = new Bishop(color);
+        pieces[6] = new Knight(color);
+        pieces[7] = new Rook(color);
+
+        //For loop to add pawns
         for (int i = 8; i < 16; i++) {
             pieces[i] = new Pawn(color);
         }
