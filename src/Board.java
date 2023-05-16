@@ -58,9 +58,10 @@ public class Board {
 
         //Print check
         //Add piece from pieces array to square
-        this.board[0][0].addPiece(whitePieces[0]);
+        //this.board[0][0].addPiece(whitePieces[0]);
+        //this.board[0][1].addPiece(blackPieces[0]);
         //Use getName which is implemented by specific piece classes which implement abstract piece class
-        System.out.println(board[0][0].piece.getName());
+        //System.out.println(board[0][0].piece.getName());
 
         //Add pieces to board
 
@@ -100,7 +101,7 @@ public class Board {
 
 
     public Piece[] createPieces(Piece[] pieces, int color) {
-        pieces[0] = new King();
+        pieces[0] = new King(color);
         /*
         pieces[0] = new Rook();
         pieces[7] = new Rook();

@@ -19,6 +19,17 @@ public abstract class Piece extends Square{
         curY = desY;
     }
 
+    public String getColor() {
+        if (color == 1) {
+            return "White";
+        }
+        return "Black";
+    }
+
+    public int getColorInt() {
+        return color;
+    }
+
     abstract String getName();
 
     //abstract boolean tracePath(int destX, int destY);
