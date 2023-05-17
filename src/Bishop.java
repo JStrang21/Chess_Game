@@ -7,7 +7,7 @@ public class Bishop extends Piece {
     }
 
     @Override
-    boolean canMove(int desX, int desY) {
+    boolean canMove(Square[][] b, int desX, int desY) {
         return false;
     }
 

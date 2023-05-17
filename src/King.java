@@ -6,7 +6,7 @@ public class King extends Piece{
         color = c;
     }
 
-    public boolean canMove(int x, int y) {
+    public boolean canMove(Square[][] b, int x, int y) {
         return true;
     }
 

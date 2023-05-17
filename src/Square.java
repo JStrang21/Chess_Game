@@ -4,9 +4,7 @@ public class Square {
 
     public Square() {
         isOccupied = false;
-
     }
-
 
     public void addPiece(Piece p) {
         //Square is occupied
@@ -20,6 +18,10 @@ public class Square {
         //Square is not occupied
         isOccupied = false;
         piece = null;
+    }
+
+    public Piece getPiece() {
+        return piece;
     }
 
 }

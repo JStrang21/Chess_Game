@@ -1,7 +1,7 @@
 public class Game {
     Player white;
     Player black;
-    Board board = new Board();
+    Chessboard board = new Chessboard();
 
 
     public Game(int i) {

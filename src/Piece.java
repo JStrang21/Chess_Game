@@ -12,11 +12,19 @@ public abstract class Piece extends Square{
         return false;
     }*/
 
-    abstract boolean canMove(int desX, int desY);
+    abstract boolean canMove(Square[][] b, int desX, int desY);
 
     public void setCoords(int desX, int desY) {
         curX = desX;
         curY = desY;
+    }
+
+    public int getX() {
+        return curX;
+    }
+
+    public int getY() {
+        return curY;
     }
 
     public String getColor() {
