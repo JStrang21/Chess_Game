@@ -13,26 +13,35 @@ public class Chessboard {
 
     //TODO: determine if this method needs to be boolean or void
     public boolean movePiece(int srcX, int srcY, int desX, int desY) {
+        //TODO create converter fn to convert string input coords into array access (Ex: A1 == 0, 0)
         //Player decides where to move piece, board checks if move is possible given the specific pieces movement
         //Get target piece from inputted x and y
         Piece targetPiece = board[srcX][srcY].piece;
+
         //TODO account for if enemy piece is on des square
+
         boolean squareOccupied = board[desX][desY].isOccupied;
         Piece occupyingPiece = board[desX][desY].getPiece();
         //If color of piece occupying destination square is same color, then cannot move there
+        //Might not need second condition (&& squareOccupied) because first condition would satisfy: test
         if ((targetPiece.getColorInt() == occupyingPiece.getColorInt()) && squareOccupied) {
+            System.out.println("Cannot move to square occupied by allied piece");
             return false;
         }
+
         //If move is possible and square has enemy piece then move piece to des square and account for kill
         if (targetPiece.canMove(board, desX, desY) && squareOccupied)  {
-            //TODO account for enemy killed here: remove piece from des square and remove piece from list of pieces
+            //TODO account for enemy killed here: remove piece from des square and place on list of player's dead pieces
             //Piece killedPiece = getPiece(desX, desY);
             //Remove target piece from original square
             board[srcX][srcY].removePiece();
 
             //Move target piece to dest square
             board[desX][desY].addPiece(targetPiece);
+            //Updated piece coords
             targetPiece.setCoords(desX, desY);
+            //Remove piece from previous square
+            //board[srcX][srcY].removePiece();
         }
         //If move is possible and no enemy piece on destination square
         else if (targetPiece.canMove(board, desX, desY) && !squareOccupied) {

@@ -8,11 +8,10 @@ public class App {
         Piece blackPawn = new Pawn(2);
         Piece whitePawn = new Pawn(1);
         //Add pawn to square
+        //g.board.board[3][0].addPiece(blackPawn);
         g.board.board[3][0].addPiece(whitePawn);
-
         //Test Pawn movement
         g.board.movePiece(1, 0, 3, 0);
-
 
         Piece pawn = g.board.getPiece(3, 0);
         System.out.println(pawn.getX() + " " + pawn.getY() + " " + pawn.getColor());
