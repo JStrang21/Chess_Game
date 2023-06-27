@@ -81,6 +81,7 @@ public class Chessboard {
 
         //Add pieces to board
         //Match pieces with correct squares on board: black on top white on bottom
+        //TODO check if initalized board correctly
         for (int i = 0; i < 8; i++) {
             //Add piece to appropriate starting square
             board[0][i].addPiece(whitePieces[i]);

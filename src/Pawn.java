@@ -25,6 +25,7 @@ public class Pawn extends Piece {
             isFirstMove = false;
             return true;
         }
+        if (desX - curX =)
         return false;
         /*if (isFirstMove) {
             //If not using diagonal attack: Y will stay the same
