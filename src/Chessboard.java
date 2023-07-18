@@ -8,6 +8,7 @@ public class Chessboard {
     }
 
     public Piece getPiece(int x, int y) {
+        //TODO: maybe make a new "empty square" piece so it doesnt return null
         return board[x][y].piece;
     }
 
@@ -22,6 +23,15 @@ public class Chessboard {
 
         boolean squareOccupied = board[desX][desY].isOccupied;
         Piece occupyingPiece = board[desX][desY].getPiece();
+        if (occupyingPiece ==  null && targetPiece.canMove(board, desX, desY)) {
+            //Remove target piece from original square
+            board[srcX][srcY].removePiece();
+            //Move target piece to dest square
+            board[desX][desY].addPiece(targetPiece);
+            //Updated piece coords
+            targetPiece.setCoords(desX, desY);
+            return true;
+        }
         //If color of piece occupying destination square is same color, then cannot move there
         //Might not need second condition (&& squareOccupied) because first condition would satisfy: test
         if ((targetPiece.getColorInt() == occupyingPiece.getColorInt()) && squareOccupied) {
@@ -42,6 +52,7 @@ public class Chessboard {
             targetPiece.setCoords(desX, desY);
             //Remove piece from previous square
             //board[srcX][srcY].removePiece();
+            return true;
         }
         //If move is possible and no enemy piece on destination square
         else if (targetPiece.canMove(board, desX, desY) && !squareOccupied) {
@@ -51,6 +62,7 @@ public class Chessboard {
             targetPiece.setCoords(desX, desY);
             //Remove piece from previous square
             board[srcX][srcY].removePiece();
+            return true;
         }
         //Else return false and piece stays in square
         return false;
@@ -117,6 +129,28 @@ public class Chessboard {
         pieces[5] = new Bishop(color);
         pieces[6] = new Knight(color);
         pieces[7] = new Rook(color);
+
+        //TODO test to make sure combined for loop works
+        /*for (int i = 0; i < 16; i++) {
+            if (i == 0 || i == 7) {
+                pieces[i] = new Rook(color);
+            }
+            else if (i == 1 || i == 6) {
+                pieces[i] = new Knight(color);
+            }
+            else if (i == 2 || i == 5) {
+                pieces[i] = new Bishop(color);
+            }
+            else if (i == 3) {
+                pieces[i] = new Queen(color);
+            }
+            else if (i == 4) {
+                pieces[i] = new King(color);
+            }
+            else {
+                pieces[i] = new Pawn(color);
+            }
+        }*/
 
         //For loop to add pawns
         for (int i = 8; i < 16; i++) {
