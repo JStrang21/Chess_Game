@@ -20,22 +20,33 @@ public class Pawn extends Piece {
         }
         //TODO account for diagonal move to attack enemy piece
         //TODO account for en passant
-        //If first move of pawn than 2 squares allowed (second condition bc only allowed when not using diagonal attack)
-        if (desX - curX == 2 && desY == curY && isFirstMove) {
-            //Check if other pieces between
-            if (b[curX + 1][curY].isOccupied) {
-                //If a piece is between than cannot move
+        if (desY == curY) {
+            //If first move of pawn than 2 squares allowed (second condition bc only allowed when not using diagonal attack)
+            if (Math.abs(desX - curX) == 2 && isFirstMove) {
+                //Check if other pieces between
+                if (b[curX + 1][curY].isOccupied) {
+                    //If a piece is between than cannot move
+                    return false;
+                }
+                isFirstMove = false;
+                return true;
+            }
+            //If just moving one square
+            else if (Math.abs(desX - curX) == 1) {
+                return true;
+            }
+            else {
                 return false;
             }
-            isFirstMove = false;
-            return true;
-        }
-        //If just moving one square
-        else if (desX - curX == 1 && desY == curY) {
-            return true;
         }
         else {
-            return false;
+            //Can only go one space up in en passant
+            if (Math.abs(desX - curX) == 1 && Math.abs(desY - curY) == 1) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
     }
 
