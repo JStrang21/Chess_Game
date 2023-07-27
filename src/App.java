@@ -19,23 +19,23 @@ public class App {
         Piece blackPawn = new Pawn(2);
         Piece whitePawn = new Pawn(1);
         //Add pawn to square
-        //g.board.board[2][0].addPiece(whitePawn);
-        //whitePawn.setCoords(2,0);
+        g.board.board[2][0].addPiece(whitePawn);
+        whitePawn.setCoords(2,0);
         g.board.board[3][0].addPiece(blackPawn);
         blackPawn.setCoords(3,0);
 
         //System.out.println(blackPawn.getX() + " " + blackPawn.getY() + " " + blackPawn.getColor());
 
         //Test Pawn movement
-        g.board.movePiece(1, 0, 2, 0);
         g.board.movePiece(2, 0, 3, 0);
+        //g.board.movePiece(2, 0, 3, 0);
 
 
         Piece pawn = g.board.getPiece(3, 0);
-        System.out.println(pawn.getX() + " " + pawn.getY() + " " + pawn.getColor());
+        System.out.println(pawn.getX() + " " + pawn.getY() + " " + pawn.getColor() + " " + pawn.getName());
 
         Piece pawnTwo = g.board.getPiece(2, 0);
-        System.out.println(pawnTwo.getX() + " " + pawnTwo.getY() + " " + pawnTwo.getColor());
+        System.out.println(pawnTwo.getX() + " " + pawnTwo.getY() + " " + pawnTwo.getColor() + " " + pawnTwo.getName());
 
         Piece pawnThree = g.board.getPiece(1, 0);
         //System.out.println(pawnThree.getX() + " " + pawnThree.getY() + " " + pawnThree.getColor());

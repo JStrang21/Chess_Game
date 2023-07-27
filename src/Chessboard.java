@@ -9,6 +9,10 @@ public class Chessboard {
 
     public Piece getPiece(int x, int y) {
         //TODO: maybe make a new "empty square" piece so it doesnt return null
+        if (board[x][y].piece == null) {
+            Piece empty = new Empty();
+            return empty;
+        }
         return board[x][y].piece;
     }
 
