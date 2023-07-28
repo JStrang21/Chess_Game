@@ -10,12 +10,12 @@ public class Pawn extends Piece {
     public boolean canMove(Square[][] b, int desX, int desY) {
         Piece occupyingPiece = b[desX][desY].getPiece();
         //If no occupying piece
-        if (occupyingPiece == null) {
+        if (occupyingPiece == null && Math.abs(curY - desY) == 0 && Math.abs(curX - desX) == 1) {
             isFirstMove = false;
             return true;
         }
         //If pieces are same color cannot move
-        if (occupyingPiece.getColorInt() == color) {
+        if (occupyingPiece == null || occupyingPiece.getColorInt() == color) {
             return false;
         }
         //TODO account for diagonal move to attack enemy piece
@@ -42,6 +42,7 @@ public class Pawn extends Piece {
         else {
             //Can only go one space up in en passant
             if (Math.abs(desX - curX) == 1 && Math.abs(desY - curY) == 1) {
+                isFirstMove = false;
                 return true;
             }
             else {

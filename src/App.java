@@ -14,6 +14,7 @@ public class App {
 // x      6
 // x      7
 
+    //Pawn tests
     //Additional pawns to add
         Piece blackPawn = new Pawn(2);
         Piece whitePawn = new Pawn(1);

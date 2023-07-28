@@ -36,6 +36,10 @@ public class Chessboard {
             targetPiece.setCoords(desX, desY);
             return true;
         }
+        else if (occupyingPiece == null && !targetPiece.canMove(board, desX, desY)) {
+            System.out.println("Illegal move");
+            return false;
+        }
         //If color of piece occupying destination square is same color, then cannot move there
         //Might not need second condition (&& squareOccupied) because first condition would satisfy: test
         if ((targetPiece.getColorInt() == occupyingPiece.getColorInt()) && squareOccupied) {
