@@ -7,10 +7,12 @@ public class Square {
     }
 
     public void addPiece(Piece p) {
+        if (isOccupied == true) this.piece = null;
         //Square is occupied
         this.piece = p;
         isOccupied = true;
     }
+
 
     public void removePiece() {
         //Create a temp piece you can return what is being removed

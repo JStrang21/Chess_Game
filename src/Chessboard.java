@@ -1,6 +1,10 @@
+import java.util.LinkedList;
+
 public class Chessboard {
     //8x8 Board of squares/chessboard
     public Square[][] board = new Square[8][8];
+    public LinkedList<Piece> removedPieces = new LinkedList<Piece>();
+
 
     public Chessboard() {
         //Sets up board with white pieces on one side and black pieces on other side
@@ -50,16 +54,19 @@ public class Chessboard {
         //If move is possible and square has enemy piece then move piece to des square and account for kill
         if (targetPiece.canMove(board, desX, desY) && squareOccupied)  {
             //TODO account for enemy killed here: remove piece from des square and place on list of player's dead pieces
-            //Piece killedPiece = getPiece(desX, desY);
+            //Add killed piece to list of removed pieces
+            removedPieces.add(occupyingPiece);
+            //Remove piece from board
+            board[desX][desY].removePiece();
+            //Update its coords
+            occupyingPiece.setCoords(10, 10);
+
             //Remove target piece from original square
             board[srcX][srcY].removePiece();
-
             //Move target piece to dest square
             board[desX][desY].addPiece(targetPiece);
             //Updated piece coords
             targetPiece.setCoords(desX, desY);
-            //Remove piece from previous square
-            //board[srcX][srcY].removePiece();
             return true;
         }
         //If move is possible and no enemy piece on destination square
