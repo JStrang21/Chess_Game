@@ -40,5 +40,8 @@ public abstract class Piece extends Square{
 
     abstract String getName();
 
+    public void print() {
+        System.out.println(curX + " " + curY + " " + this.getColor() + " " + this.getName());
+    }
     //abstract boolean tracePath(int destX, int destY);
 }

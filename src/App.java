@@ -8,47 +8,34 @@ public class App {
 //          0  1  2  3  4  5  6  7
 // x      0
 // x      1
-// x      2 wR                   bR
+// x      2       wK
 // x      3
-// x      4
+// x      4    bK    bP
 // x      5
 // x      6
 // x      7
 
 
-        //Rook tests
-        Piece bRook = new Rook(2);
-        Piece wRook = new Rook(1);
+        //Knight tests
+        Piece bKnight = new Knight(2);
+        Piece wKnight = new Knight(1);
         Piece wPawn = new Pawn(1);
         Piece bPawn = new Pawn(2);
 
-        g.board.board[2][0].addPiece(wRook);
-        wRook.setCoords(2,0);
-        g.board.board[2][7].addPiece(bRook);
-        bRook.setCoords(2,7);
-        g.board.board[2][1].addPiece(wPawn);
-        wPawn.setCoords(2,1);
-        /*g.board.board[2][6].addPiece(bPawn);
-        bPawn.setCoords(2,6);*/
+        g.board.board[2][2].addPiece(wKnight);
+        wKnight.setCoords(2,2);
+        g.board.board[1][4].addPiece(bKnight);
+        bKnight.setCoords(1,4);
+        g.board.board[1][2].addPiece(bPawn);
+        wPawn.setCoords(3,4);
 
-        //Before move
-        Piece rookOne = g.board.getPiece(2, 0);
-        Piece rookTwo = g.board.getPiece(2, 7);
-        //Piece wPawn = g.board.getPiece(2, 3);
-        //Piece pTwo = g.board.getPiece(2, 4);
-
-
-        //Left to right
-        //g.board.movePiece(2, 0, 2, 7);
-        //Top to bottom
-        //g.board.movePiece(2,0,5,0);
-        //Left to right with piece inbetween
-        g.board.movePiece(2,7,3,0);
+        g.board.movePiece(2,2,1,4);
 
 
         //After move
-        System.out.println(rookOne.getX() + " " + rookOne.getY() + " " + rookOne.getColor() + " " + rookOne.getName());
-        System.out.println(rookTwo.getX() + " " + rookTwo.getY() + " " + rookTwo.getColor() + " " + rookTwo.getName());
+        wKnight.print();
+        bKnight.print();
+        bPawn.print();
 
 
 
