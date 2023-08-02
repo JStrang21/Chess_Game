@@ -8,8 +8,8 @@ public class App {
 //          0  1  2  3  4  5  6  7
 // x      0
 // x      1
-// x      2       wK
-// x      3
+// x      2
+// x      3          wK
 // x      4    bK    bP
 // x      5
 // x      6
@@ -22,14 +22,14 @@ public class App {
         Piece wPawn = new Pawn(1);
         Piece bPawn = new Pawn(2);
 
-        g.board.board[2][2].addPiece(wKnight);
-        wKnight.setCoords(2,2);
-        g.board.board[1][4].addPiece(bKnight);
-        bKnight.setCoords(1,4);
-        g.board.board[1][2].addPiece(bPawn);
-        wPawn.setCoords(3,4);
+        g.board.board[3][3].addPiece(wKnight);
+        wKnight.setCoords(3,3);
+        g.board.board[4][1].addPiece(bKnight);
+        bKnight.setCoords(4,1);
+        g.board.board[4][3].addPiece(bPawn);
+        bPawn.setCoords(4,3);
 
-        g.board.movePiece(2,2,1,4);
+        g.board.movePiece(4,1,3,3);
 
 
         //After move

@@ -10,7 +10,30 @@ public class Knight extends Piece {
     boolean canMove(Square[][] b, int desX, int desY) {
         Piece occupyingPiece = b[desX][desY].getPiece();
 
-        //if (desX )
+        //If movement(2 square movement) is above/below
+        if (Math.abs(desX - curX) == 2) {
+            if (Math.abs(desY - curY) == 1) {
+                return true;
+            }
+            return false;
+            /*
+            //If movement is to left
+            if (curY > desY) {
+
+            }
+            //If movement is to right
+            else if (desY > curY) {
+
+            }
+             */
+        }
+        //If movement(2 square movement) is to right/left
+        if (Math.abs(desX - curX) == 1) {
+            if (Math.abs(desY - curY) == 2) {
+                return true;
+            }
+            return false;
+        }
         return false;
     }
 
