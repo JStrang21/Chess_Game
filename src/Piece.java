@@ -34,6 +34,19 @@ public abstract class Piece extends Square{
         return "Black";
     }
 
+    public String getColorChar() {
+        if (color == 1) {
+            return "w";
+        }
+        return "b";
+    }
+
+    public String getNameChar() {
+        String name = this.getName();
+        String firstLetter = this.getName().substring(0, 1);
+        return firstLetter;
+    }
+
     public int getColorInt() {
         return color;
     }
@@ -42,6 +55,9 @@ public abstract class Piece extends Square{
 
     public void print() {
         System.out.println(curX + " " + curY + " " + this.getColor() + " " + this.getName());
+    }
+    public void printOnBoard() {
+        System.out.print(this.getColorChar() + this.getNameChar());
     }
     //abstract boolean tracePath(int destX, int destY);
 }

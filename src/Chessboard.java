@@ -174,4 +174,39 @@ public class Chessboard {
 
         return pieces;
     }
+
+    public void printBoard() {
+        System.out.print("    y");
+        for (int k = 0; k < 7; k++) {
+            System.out.print("   y");
+        }
+        System.out.println();
+
+        System.out.print("   __");
+        for (int i = 0; i < 15; i++) {
+            System.out.print("__");
+        }
+        System.out.println();
+
+        for (int i = 0; i < 8; i++) {
+            System.out.print("x |");
+            for (int j = 0; j < 8; j++) {
+                Piece p = board[i][j].getPiece();
+                if (p == null) {
+                    System.out.print("    ");
+                    continue;
+                }
+                System.out.print(" ");
+                p.printOnBoard();
+                System.out.print(" ");
+            }
+            System.out.println("|");
+        }
+
+        System.out.print("   __");
+        for (int i = 0; i < 15; i++) {
+            System.out.print("__");
+        }
+        System.out.println();
+    }
 }

@@ -15,6 +15,12 @@ public class App {
 // x      6
 // x      7
 
+        g.board.movePiece(7,1,5,2);
+        g.board.printBoard();
+        g.board.movePiece(1,1,3,1);
+        g.board.printBoard();
+        g.board.movePiece(5,2,3,1);
+        g.board.printBoard();
 
     }
 }
