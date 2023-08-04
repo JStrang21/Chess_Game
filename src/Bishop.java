@@ -11,6 +11,11 @@ public class Bishop extends Piece {
         Piece occupyingPiece = b[desX][desY].getPiece();
         int disX = Math.abs(desX - curX);
         int disY = Math.abs(desY - curY);
+
+        if (disX != disY) {
+            return false;
+        }
+
         //Moving down
         if (desX > curX) {
             //int larger = getLarger(disX, disY);

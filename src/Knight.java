@@ -16,16 +16,6 @@ public class Knight extends Piece {
                 return true;
             }
             return false;
-            /*
-            //If movement is to left
-            if (curY > desY) {
-
-            }
-            //If movement is to right
-            else if (desY > curY) {
-
-            }
-             */
         }
         //If movement(2 square movement) is to right/left
         if (Math.abs(desX - curX) == 1) {
