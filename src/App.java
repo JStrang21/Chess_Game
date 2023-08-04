@@ -8,33 +8,33 @@ public class App {
 //          0  1  2  3  4  5  6  7
 // x      0
 // x      1
-// x      2
-// x      3          wK
-// x      4    bK    bP
-// x      5
+// x      2 wB
+// x      3
+// x      4
+// x      5          bB
 // x      6
 // x      7
 
 
         //Knight tests
-        Piece bKnight = new Knight(2);
-        Piece wKnight = new Knight(1);
+        Piece bBishop = new Bishop(2);
+        Piece wBishop = new Bishop(1);
+        g.board.board[5][3].addPiece(bBishop);
+        bBishop.setCoords(5,3);
+        g.board.board[2][0].addPiece(wBishop);
+        wBishop.setCoords(2,0);
+
         Piece wPawn = new Pawn(1);
         Piece bPawn = new Pawn(2);
+        g.board.board[7][1].addPiece(bPawn);
+        bPawn.setCoords(7,1);
 
-        g.board.board[3][3].addPiece(wKnight);
-        wKnight.setCoords(3,3);
-        g.board.board[4][1].addPiece(bKnight);
-        bKnight.setCoords(4,1);
-        g.board.board[4][3].addPiece(bPawn);
-        bPawn.setCoords(4,3);
-
-        g.board.movePiece(4,1,3,3);
+        g.board.movePiece(5,3,1,0);
 
 
         //After move
-        wKnight.print();
-        bKnight.print();
+        bBishop.print();
+        wBishop.print();
         bPawn.print();
 
 

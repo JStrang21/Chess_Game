@@ -9,7 +9,6 @@ public class Rook extends Piece {
     boolean canMove(Square[][] b, int desX, int desY) {
         //TODO account for swapping places with king when both haven't moved
         Piece occupyingPiece = b[desX][desY].getPiece();
-
         //If rook is moving down/up (yaxis)
         if (desY == curY) {
             int distance = Math.abs(desX - curX);
