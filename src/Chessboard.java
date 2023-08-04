@@ -136,17 +136,17 @@ public class Chessboard {
 
     public Piece[] createPieces(Piece[] pieces, int color) {
         //Pieces added to array in order of board position
-        pieces[0] = new Rook(color);
+        /*pieces[0] = new Rook(color);
         pieces[1] = new Knight(color);
         pieces[2] = new Bishop(color);
         pieces [3] = new Queen(color);
         pieces[4] = new King(color);
         pieces[5] = new Bishop(color);
         pieces[6] = new Knight(color);
-        pieces[7] = new Rook(color);
+        pieces[7] = new Rook(color);*/
 
         //TODO test to make sure combined for loop works
-        /*for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 16; i++) {
             if (i == 0 || i == 7) {
                 pieces[i] = new Rook(color);
             }
@@ -165,7 +165,7 @@ public class Chessboard {
             else {
                 pieces[i] = new Pawn(color);
             }
-        }*/
+        }
 
         //For loop to add pawns
         for (int i = 8; i < 16; i++) {
