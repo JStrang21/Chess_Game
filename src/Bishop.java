@@ -25,14 +25,29 @@ public class Bishop extends Piece {
             }
             //Moving down and left
             if (curY > desY) {
-                //for (int i = )
+                for (int i = 1; i < disX; i++) {
+                    if (b[curX + i][curY - i].isOccupied) {
+                        return false;
+                    }
+                }
+                return true;
             }
         }
         //Moving up
         if (desX < curX) {
+            //Moving up and left
             if (desY < curY) {
                 for (int i = 1; i < disX; i++) {
                     if (b[curX - i][curY - i].isOccupied) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            //Moving up and right
+            if (desY > curY) {
+                for (int i = 1; i < disX; i++) {
+                    if (b[curX - i][curY + i].isOccupied) {
                         return false;
                     }
                 }
