@@ -6,7 +6,14 @@ public class King extends Piece{
         color = c;
     }
 
-    public boolean canMove(Square[][] b, int x, int y) {
+    public boolean canMove(Square[][] b, int desX, int desY) {
+        Piece occupyingPiece = b[desX][desY].getPiece();
+        //King can only move one space
+        if (Math.abs(desX - curX) != 1 || Math.abs(desY - curY) != 1) {
+            return false;
+        }
+
+
         return true;
     }
 
