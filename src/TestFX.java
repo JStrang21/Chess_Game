@@ -7,5 +7,16 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class TestFX extends Application {
+    Button button;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+
+    }
+
 
 }
