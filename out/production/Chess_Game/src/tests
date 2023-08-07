@@ -1,0 +1,130 @@
+    //Pawn tests
+    //Additional pawns to add
+    /*    Piece blackPawn = new Pawn(2);
+        Piece whitePawn = new Pawn(1);
+        Piece w1 = new Pawn(1);
+        Piece b1 = new Pawn(2);
+        //Add pawn to square
+        g.board.board[2][0].addPiece(whitePawn);
+        whitePawn.setCoords(2,0);
+        g.board.board[3][0].addPiece(blackPawn);
+        blackPawn.setCoords(3,0);
+        g.board.board[2][1].addPiece(w1);
+        w1.setCoords(2, 1);
+        g.board.board[3][1].addPiece(b1);
+        b1.setCoords(3, 1);
+
+        //Test Pawn movement
+        g.board.movePiece(2, 0, 3, 1);
+
+
+        Piece pawn = g.board.getPiece(2, 0);
+        System.out.println(pawn.getX() + " " + pawn.getY() + " " + pawn.getColor() + " " + pawn.getName());
+
+        Piece pawnTwo = g.board.getPiece(3, 1);
+        System.out.println(pawnTwo.getX() + " " + pawnTwo.getY() + " " + pawnTwo.getColor() + " " + pawnTwo.getName());
+
+        //Piece pawnThree = g.board.getPiece(1, 0);
+        //System.out.println(pawnThree.getX() + " " + pawnThree.getY() + " " + pawnThree.getColor());
+        */
+
+
+        //Rook tests
+                Piece bRook = new Rook(2);
+                Piece wRook = new Rook(1);
+                Piece wPawn = new Pawn(1);
+                Piece bPawn = new Pawn(2);
+
+                g.board.board[2][0].addPiece(wRook);
+                wRook.setCoords(2,0);
+                g.board.board[2][7].addPiece(bRook);
+                bRook.setCoords(2,7);
+                g.board.board[2][1].addPiece(wPawn);
+                wPawn.setCoords(2,1);
+                /*g.board.board[2][6].addPiece(bPawn);
+                bPawn.setCoords(2,6);*/
+
+                //Before move
+                Piece rookOne = g.board.getPiece(2, 0);
+                Piece rookTwo = g.board.getPiece(2, 7);
+                //Piece wPawn = g.board.getPiece(2, 3);
+                //Piece pTwo = g.board.getPiece(2, 4);
+
+
+                //Left to right
+                //g.board.movePiece(2, 0, 2, 7);
+                //Top to bottom
+                //g.board.movePiece(2,0,5,0);
+                //Left to right with piece inbetween
+                g.board.movePiece(2,7,3,0);
+
+
+                //After move
+                System.out.println(rookOne.getX() + " " + rookOne.getY() + " " + rookOne.getColor() + " " + rookOne.getName());
+                System.out.println(rookTwo.getX() + " " + rookTwo.getY() + " " + rookTwo.getColor() + " " + rookTwo.getName());
+
+        //Knight tests
+                Piece bKnight = new Knight(2);
+                Piece wKnight = new Knight(1);
+                Piece wPawn = new Pawn(1);
+                Piece bPawn = new Pawn(2);
+
+                g.board.board[3][3].addPiece(wKnight);
+                wKnight.setCoords(3,3);
+                g.board.board[4][1].addPiece(bKnight);
+                bKnight.setCoords(4,1);
+                g.board.board[4][3].addPiece(bPawn);
+                bPawn.setCoords(4,3);
+
+                g.board.movePiece(4,1,3,3);
+
+
+                //After move
+                wKnight.print();
+                bKnight.print();
+                bPawn.print();
+
+        //Bishop tests
+                Piece bBishop = new Bishop(2);
+                Piece wBishop = new Bishop(1);
+                g.board.board[5][0].addPiece(bBishop);
+                bBishop.setCoords(5,0);
+                g.board.board[2][3].addPiece(wBishop);
+                wBishop.setCoords(2,3);
+
+                Piece wPawn = new Pawn(1);
+                Piece bPawn = new Pawn(2);
+                g.board.board[1][2].addPiece(bPawn);
+                bPawn.setCoords(1,2);
+
+                g.board.movePiece(5,0,2,3);
+
+
+                //After move
+                bBishop.print();
+                wBishop.print();
+                bPawn.print();
+
+        //Queen tests
+                Piece bQueen = new Queen(2);
+                Piece wQueen = new Queen(1);
+                g.board.board[5][0].addPiece(bQueen);
+                bQueen.setCoords(5,0);
+                g.board.board[2][3].addPiece(wQueen);
+                wQueen.setCoords(2,3);
+
+                Piece wPawn = new Pawn(1);
+                Piece bPawn = new Pawn(2);
+                g.board.board[5][3].addPiece(wPawn);
+                wPawn.setCoords(5,3);
+                g.board.board[2][0].addPiece(bPawn);
+                bPawn.setCoords(2,0);
+
+                g.board.movePiece(2,3,5,0);
+
+                //After move
+                wQueen.print();
+                bQueen.print();
+                //bPawn.print();
+                //wPawn.print();
+                System.out.println();

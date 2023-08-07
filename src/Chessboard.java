@@ -182,22 +182,40 @@ public class Chessboard {
     }
 
     public int[] convert(String src, String des) {
+        //Ex: src's char(1st) == coords[1] && src's int(2nd) == coords[0]
         int[] coords = new int[4];
 
-        //Find what first digit is
+        //Find what first digit/y is
         char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 
         int j = 0;
         for (char i : letters) {
             if (src.charAt(0) == i) {
-                coords[0] = j;
+                coords[1] = j;
             }
             if (des.charAt(0) == i) {
-                coords[2] = j;
+                coords[3] = j;
             }
+            j++;
         }
 
-        
+        //Find what int/x is
+        int[] ints = {99, 7, 6, 5, 4, 3, 2, 1, 0};
+        char srcIntChar = src.charAt(1);
+        int srcInt = Character.getNumericValue(srcIntChar);
+        char desIntChar = des.charAt(1);
+        int desInt = Character.getNumericValue(desIntChar);
+
+        coords[0] = ints[srcInt];
+        coords[2] = ints[desInt];
+        /*for (int i : ints) {
+            if (srcInt == i) {
+                coords[0] = i;
+            }
+            if (desInt == i) {
+                coords[2] = i;
+            }
+        }*/
         return coords;
     }
 
