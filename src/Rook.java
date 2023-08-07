@@ -32,7 +32,7 @@ public class Rook extends Piece {
                 return true;
             }
             //Moving up
-            if (curX < desX) {
+            if (desX < curX) {
                 for (int i = 1; i < distance; i++) {
                     if (b[curX - i][curY].isOccupied) {
                         return false;

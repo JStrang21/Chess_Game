@@ -4,9 +4,16 @@ public class Chessboard {
     //8x8 Board of squares/chessboard
     public Square[][] board = new Square[8][8];
     public LinkedList<Piece> removedPieces = new LinkedList<Piece>();
+    //Ensure correct turns
+    boolean whiteTurn = true;
+    boolean blackTurn = false;
+    Player white;
+    Player black;
 
 
-    public Chessboard() {
+    public Chessboard(Player w, Player b) {
+        white = w;
+        black = b;
         //Sets up board with white pieces on one side and black pieces on other side
         initalizePieces();
     }
@@ -32,6 +39,16 @@ public class Chessboard {
         //Player decides where to move piece, board checks if move is possible given the specific pieces movement
         //Get target piece from inputted x and y
         Piece targetPiece = board[srcX][srcY].piece;
+        //Check if turn is out of order
+        if (white.isTurn() && targetPiece.getColorInt() != white.color) {
+            System.out.println("Not black player's turn");
+            return false;
+        }
+        if (black.isTurn() && targetPiece.getColorInt() != black.color) {
+            System.out.println("Not white player's turn");
+            return false;
+        }
+
 
         //TODO account for if enemy piece is on des square
 
@@ -44,6 +61,7 @@ public class Chessboard {
             board[desX][desY].addPiece(targetPiece);
             //Updated piece coords
             targetPiece.setCoords(desX, desY);
+            changeTurn();
             return true;
         }
         else if (occupyingPiece == null && !targetPiece.canMove(board, desX, desY)) {
@@ -73,6 +91,7 @@ public class Chessboard {
             board[desX][desY].addPiece(targetPiece);
             //Updated piece coords
             targetPiece.setCoords(desX, desY);
+            changeTurn();
             return true;
         }
         //If move is possible and no enemy piece on destination square
@@ -83,6 +102,7 @@ public class Chessboard {
             targetPiece.setCoords(desX, desY);
             //Remove piece from previous square
             board[srcX][srcY].removePiece();
+            changeTurn();
             return true;
         }
         //Else return false and piece stays in square
@@ -220,9 +240,10 @@ public class Chessboard {
     }
 
     public void printBoard() {
-        System.out.print("    y");
-        for (int k = 0; k < 7; k++) {
-            System.out.print("   y");
+        char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+        System.out.print("    a");
+        for (int k = 1; k < 8; k++) {
+            System.out.print("   " + letters[k]);
         }
         System.out.println();
 
@@ -232,8 +253,9 @@ public class Chessboard {
         }
         System.out.println();
 
-        for (int i = 0; i < 8; i++) {
-            System.out.print("x |");
+        for (int i = 0, k = 8; i < 8; i++) {
+            System.out.print(k + " |");
+            k--;
             for (int j = 0; j < 8; j++) {
                 Piece p = board[i][j].getPiece();
                 if (p == null) {
@@ -253,4 +275,17 @@ public class Chessboard {
         }
         System.out.println();
     }
+
+    public void changeTurn() {
+        //Change player turn
+        if (white.isTurn()) {
+            white.turn = false;
+            black.turn = true;
+        }
+        else {
+            black.turn = false;
+            white.turn = true;
+        }
+    }
 }
+

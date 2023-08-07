@@ -128,3 +128,34 @@
                 //bPawn.print();
                 //wPawn.print();
                 System.out.println();
+
+
+//Game test
+g.board.movePiece("a7","a5");
+        g.board.movePiece("a2", "a4");
+        g.board.movePiece("a8","a6");
+        g.board.movePiece("b1", "c3");
+        g.board.movePiece("a6","c6");
+        g.board.movePiece("h2", "h4");
+        g.board.movePiece("c6", "c3");
+        g.board.movePiece("b2","c3");
+        g.board.movePiece("g7", "g5");
+        g.board.movePiece("g2","g4");
+        g.board.movePiece("f8", "g7");
+        g.board.movePiece("h4", "h5");
+        g.board.movePiece("g7", "c3");
+        g.board.movePiece("h1", "h3");
+        g.board.movePiece("b7", "b6");
+        g.board.movePiece("h5", "h6");
+        g.board.movePiece("c3", "d2");
+        g.board.movePiece("d1", "d2");
+        g.board.movePiece("g8", "h6");
+        g.board.movePiece("d2", "d7");
+        g.board.movePiece("e8", "d7");
+        g.board.movePiece("c1", "g5");
+        g.board.movePiece("e7", "e6");
+        g.board.movePiece("h3", "h5");
+        g.board.movePiece("d8", "g5");
+        g.board.movePiece("h5", "h1");
+        g.board.movePiece("g5", "g8");
+        g.board.printBoard();

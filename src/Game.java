@@ -1,7 +1,7 @@
 public class Game {
     Player white;
     Player black;
-    Chessboard board = new Chessboard();
+    Chessboard board;
 
 
     public Game(int i) {
@@ -12,7 +12,11 @@ public class Game {
             black = new Player();
             //int 1 represents white && int 2 represents black
             white.color = 1;
+            white.turn = true;
             black.color = 2;
+            black.turn = false;
+
+            board = new Chessboard(white, black);
         }
         else if (i == 2) {
             //Two player game
