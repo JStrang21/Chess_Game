@@ -21,7 +21,13 @@ public class Chessboard {
     }
 
     //TODO: determine if this method needs to be boolean or void
-    public boolean movePiece(int srcX, int srcY, int desX, int desY) {
+    public boolean movePiece(String src, String des) {
+        //String src = srcX and srcY while String des = desX and desY
+        int[] convertedCoords = convert(src, des);
+        int srcX = convertedCoords[0];
+        int srcY = convertedCoords[1];
+        int desX = convertedCoords[2];
+        int desY = convertedCoords[3];
         //TODO create converter fn to convert string input coords into array access (Ex: A1 == 0, 0)
         //Player decides where to move piece, board checks if move is possible given the specific pieces movement
         //Get target piece from inputted x and y
@@ -173,6 +179,26 @@ public class Chessboard {
         }
 
         return pieces;
+    }
+
+    public int[] convert(String src, String des) {
+        int[] coords = new int[4];
+
+        //Find what first digit is
+        char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+
+        int j = 0;
+        for (char i : letters) {
+            if (src.charAt(0) == i) {
+                coords[0] = j;
+            }
+            if (des.charAt(0) == i) {
+                coords[2] = j;
+            }
+        }
+
+        
+        return coords;
     }
 
     public void printBoard() {
