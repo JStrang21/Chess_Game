@@ -9,6 +9,7 @@ public class Chessboard {
     boolean blackTurn = false;
     Player white;
     Player black;
+    boolean won = false;
 
 
     public Chessboard(Player w, Player b) {
@@ -19,7 +20,6 @@ public class Chessboard {
     }
 
     public Piece getPiece(int x, int y) {
-        //TODO: maybe make a new "empty square" piece so it doesnt return null
         if (board[x][y].piece == null) {
             Piece empty = new Empty();
             return empty;
@@ -27,18 +27,21 @@ public class Chessboard {
         return board[x][y].piece;
     }
 
-    //TODO: determine if this method needs to be boolean or void
     public boolean movePiece(String src, String des) {
         //String src = srcX and srcY while String des = desX and desY
+        //TODO: converter is wrong
         int[] convertedCoords = convert(src, des);
         int srcX = convertedCoords[0];
         int srcY = convertedCoords[1];
         int desX = convertedCoords[2];
         int desY = convertedCoords[3];
-        //TODO create converter fn to convert string input coords into array access (Ex: A1 == 0, 0)
         //Player decides where to move piece, board checks if move is possible given the specific pieces movement
         //Get target piece from inputted x and y
-        Piece targetPiece = board[srcX][srcY].piece;
+        Piece targetPiece = board[srcX][srcY].getPiece();
+        if (targetPiece == null) {
+            System.out.println("No piece at selected square");
+            return false;
+        }
         //Check if turn is out of order
         if (white.isTurn() && targetPiece.getColorInt() != white.color) {
             System.out.println("Not black player's turn");
@@ -48,9 +51,6 @@ public class Chessboard {
             System.out.println("Not white player's turn");
             return false;
         }
-
-
-        //TODO account for if enemy piece is on des square
 
         boolean squareOccupied = board[desX][desY].isOccupied;
         Piece occupyingPiece = board[desX][desY].getPiece();
@@ -77,6 +77,16 @@ public class Chessboard {
 
         //If move is possible and square has enemy piece then move piece to des square and account for kill
         if (targetPiece.canMove(board, desX, desY) && squareOccupied)  {
+            String targetName = targetPiece.getName();
+            //Ensure pawn only does diagonalattack (not front etc)
+            if (targetName.equals("Pawn")) {
+                Pawn targetPawn = (Pawn) targetPiece;
+                //If pawn cannot do diagnoal than stop
+                if (targetPawn.diagonalAttack == false) {
+                    System.out.println("Pawn cannot move forward onto a square occupied by another piece");
+                    return false;
+                }
+            }
             //TODO account for enemy killed here: remove piece from des square and place on list of player's dead pieces
             //Add killed piece to list of removed pieces
             removedPieces.add(occupyingPiece);
@@ -125,16 +135,8 @@ public class Chessboard {
         whitePieces = createPieces(whitePieces, 1);
         blackPieces = createPieces(blackPieces, 2);
 
-        //Print check
-        //Add piece from pieces array to square
-        //this.board[0][0].addPiece(whitePieces[0]);
-        //this.board[0][1].addPiece(blackPieces[0]);
-        //Use getName which is implemented by specific piece classes which implement abstract piece class
-        //System.out.println(board[0][0].piece.getName());
-
         //Add pieces to board
         //Match pieces with correct squares on board: black on top white on bottom
-        //TODO check if initalized board correctly
         for (int i = 0; i < 8; i++) {
             //Add piece to appropriate starting square
             board[0][i].addPiece(whitePieces[i]);

@@ -159,3 +159,29 @@ g.board.movePiece("a7","a5");
         g.board.movePiece("h5", "h1");
         g.board.movePiece("g5", "g8");
         g.board.printBoard();
+
+
+
+ /*@Override
+     public void start(Stage primaryStage) throws Exception {
+         GridPane board= new GridPane();
+
+         int count = 0;
+         double s = 100;
+         for (int i = 0; i < 8; i++) {
+             count++;
+             for (int j = 0; j < 8; j++) {
+                 Rectangle r = new Rectangle(s, s, s, s);
+                 if (count % 2 == 0) {
+                     r.setFill(Color.WHITE);
+                 }
+                 board.add(r, j, i);
+                 count++;
+             }
+         }
+
+         Scene scene = new Scene(board);
+         primaryStage.setTitle("Chess");
+         primaryStage.setScene(scene);
+         primaryStage.show();
+     }*/

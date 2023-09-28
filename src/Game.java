@@ -2,6 +2,7 @@ public class Game {
     Player white;
     Player black;
     Chessboard board;
+    boolean won = false;
 
 
     public Game(int i) {
@@ -23,10 +24,16 @@ public class Game {
             white = new Player(i);
             black = new Player(i);
         }
-        /*else {
-            //CPU vs CPU (may remove in future)
-            playerOne = new Ai();
-            playerTwo = new Ai();
-        }*/
+    }
+
+    public void printRemovedPieces() {
+        for (Piece p : board.removedPieces) {
+            System.out.println(p.name);
+        }
+    }
+
+    public boolean checkWin() {
+
+        return false;
     }
 }
