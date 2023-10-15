@@ -4,6 +4,9 @@ public class Chessboard {
     //8x8 Board of squares/chessboard
     public Square[][] board = new Square[8][8];
     public LinkedList<Piece> removedPieces = new LinkedList<Piece>();
+    public LinkedList<Piece> removedPiecesWhite = new LinkedList<Piece>();
+    public LinkedList<Piece> removedPiecesBlack = new LinkedList<Piece>();
+
     //Ensure correct turns
     boolean whiteTurn = true;
     boolean blackTurn = false;
@@ -93,8 +96,14 @@ public class Chessboard {
                 }
             }
             //TODO account for enemy killed here: remove piece from des square and place on list of player's dead pieces
-            //Add killed piece to list of removed pieces
-            removedPieces.add(occupyingPiece);
+            //Add killed piece to white or black list of removed pieces
+            if (occupyingPiece.getColorInt() == 1) {
+                removedPiecesWhite.add(occupyingPiece);
+            }
+            else {
+                removedPiecesBlack.add(occupyingPiece);
+            }
+            //TODO: print what piece was taken
             //Remove piece from board
             board[desX][desY].removePiece();
             //Update its coords
@@ -247,10 +256,6 @@ public class Chessboard {
         return coords;
     }
 
-    public void printBoardTwo() {
-
-    }
-
     public void printBoard() {
         char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
         System.out.print("     a");
@@ -299,6 +304,21 @@ public class Chessboard {
             black.turn = false;
             white.turn = true;
         }
+    }
+
+    public boolean checkForKing() {
+        //If king is in either lists then game is over
+        for (Piece p : removedPiecesWhite) {
+            if (p.getNameString().equals("King")) {
+                return true;
+            }
+        }
+        for (Piece p : removedPiecesBlack) {
+            if (p.getNameString().equals("King")) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 

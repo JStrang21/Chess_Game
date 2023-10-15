@@ -6,6 +6,11 @@ public class King extends Piece{
         color = c;
     }
 
+    @Override
+    public String getNameString() {
+        return name;
+    }
+
     public boolean canMove(Square[][] b, int desX, int desY) {
         Piece occupyingPiece = b[desX][desY].getPiece();
         //King can only move one space

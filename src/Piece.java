@@ -51,6 +51,8 @@ public abstract class Piece extends Square{
         return color;
     }
 
+    abstract String getNameString();
+
     abstract String getName(
 
     );

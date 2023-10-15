@@ -7,6 +7,12 @@ public class Pawn extends Piece {
         //Constructor to specify color
         color = c;
     }
+
+    @Override
+    public String getNameString() {
+        return name;
+    }
+
     @Override
     public boolean canMove(Square[][] b, int desX, int desY) {
         Piece occupyingPiece = b[desX][desY].getPiece();

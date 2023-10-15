@@ -59,7 +59,7 @@ public class App{
             //g.printRemovedPieces();
         }
         //g.board.movePiece("b7", "b6");
-        g.board.printBoard();
+        //g.board.printBoard();
     }
 
 }

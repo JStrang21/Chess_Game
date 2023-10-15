@@ -6,6 +6,10 @@ public class Rook extends Piece {
         color = c;
     }
     @Override
+    public String getNameString() {
+        return name;
+    }
+    @Override
     boolean canMove(Square[][] b, int desX, int desY) {
         //TODO account for swapping places with king when both haven't moved
         Piece occupyingPiece = b[desX][desY].getPiece();

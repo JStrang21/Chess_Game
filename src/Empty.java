@@ -5,6 +5,11 @@ public class Empty extends Piece{
         return false;
     }
 
+    @Override
+    public String getNameString() {
+        return name;
+    }
+
     public String getName() {
         return name;
     }

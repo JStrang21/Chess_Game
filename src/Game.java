@@ -28,12 +28,22 @@ public class Game {
 
     public void printRemovedPieces() {
         for (Piece p : board.removedPieces) {
-            System.out.println(p.name);
+            System.out.println(p.getColor() + " " + p.getNameString());
         }
     }
 
     public boolean checkWin() {
-        printRemovedPieces();
+        //printRemovedPieces();
+        //TODO: Checkmate logic
+        //If either list of removed pieces has 16 that means all pieces of that side have been taken
+        if (board.removedPiecesWhite.size() == 16 || board.removedPiecesBlack.size() == 16) {
+            return true;
+        }
+
+        //Check for king in lists
+        if (board.checkForKing()) {
+
+        }
         return false;
     }
 }

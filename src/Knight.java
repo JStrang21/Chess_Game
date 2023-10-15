@@ -7,6 +7,11 @@ public class Knight extends Piece {
     }
 
     @Override
+    public String getNameString() {
+        return name;
+    }
+
+    @Override
     boolean canMove(Square[][] b, int desX, int desY) {
         Piece occupyingPiece = b[desX][desY].getPiece();
 
