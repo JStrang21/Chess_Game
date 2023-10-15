@@ -17,7 +17,7 @@ public class App{
         //Mixed up X and Y coords initially
         //White top of board/Black bottom of board
 //          a  b  c  d  e  f  g  h
-//          0  1  2  3  4  5  6  7
+//          0  1  2  3  4  5  6  7  
 // 8      0
 // 7      1
 // 6      2
@@ -26,6 +26,7 @@ public class App{
 // 3      5
 // 2      6
 // 1      7
+
         /*
         Bugs:
         -Crashes when pawn moves diagonal to space with no piece:illegal move but don't want crashing
@@ -55,7 +56,7 @@ public class App{
             g.board.movePiece(src, des);
             g.board.printBoard();
             gameWon = g.checkWin();
-            g.printRemovedPieces();
+            //g.printRemovedPieces();
         }
         //g.board.movePiece("b7", "b6");
         g.board.printBoard();

@@ -10,10 +10,17 @@ public class Pawn extends Piece {
     @Override
     public boolean canMove(Square[][] b, int desX, int desY) {
         Piece occupyingPiece = b[desX][desY].getPiece();
-        if (color == 1 && desX - curX > 1) {
+        //Piece cannot move backwards
+        if (color == 1 && desX - curX < 1) {
+            System.out.println("Can not move pawn backwards/sideways");
             return false;
         }
         if (color == 2 && desX - curX > 1) {
+            System.out.println("Can not move pawn backwards/sideways");
+            return false;
+        }
+        //Cannot move more than two spaces after first move
+        if (occupyingPiece == null && Math.abs(curX - desX) > 1 && isFirstMove == false) {
             return false;
         }
         //If no occupying piece
@@ -21,27 +28,19 @@ public class Pawn extends Piece {
             isFirstMove = false;
             return true;
         }
-        /*//White pawn
-        if (color == 1 && occupyingPiece == null && Math.abs(curY - desY) == 0) {
-            if (curX - desX < 1) {
+        //No occupying piece
+        if (occupyingPiece == null && Math.abs(curY - desY) == 0 && Math.abs(curX - desX) == 1) {
+            isFirstMove = false;
+            return true;
+        }
+
+        if (occupyingPiece != null) {
+            //If pieces are same color cannot move
+            if (occupyingPiece.getColorInt() == color) {
                 return false;
             }
         }
-        if (color == 2 && occupyingPiece == null && Math.abs(curY - desY) == 0) {
-            if (curX - desX > -1) {
-                return false;
-            }
-        }
-        if (occupyingPiece == null && Math.abs(curY - desY) == 0 && desX - curX 1 && color == 1) {
-            return true;
-        }
-        if (occupyingPiece == null && Math.abs(curY - desY) == 0 && curX - desX == 1 && color == 2) {
-            return true;
-        }*/
-        //If pieces are same color cannot move
-        if (occupyingPiece.getColorInt() == color) {
-            return false;
-        }
+
         //TODO account for diagonal move to attack enemy piece
         //TODO account for en passant
         if (desY == curY) {
@@ -68,7 +67,7 @@ public class Pawn extends Piece {
         }
         else {
             //Can only go one space up in en passant
-            if (Math.abs(desX - curX) == 1 && Math.abs(desY - curY) == 1) {
+            if (Math.abs(desX - curX) == 1 && Math.abs(desY - curY) == 1 && occupyingPiece != null) {
                 isFirstMove = false;
                 diagonalAttack = true;
                 return true;

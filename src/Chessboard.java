@@ -54,6 +54,11 @@ public class Chessboard {
 
         boolean squareOccupied = board[desX][desY].isOccupied;
         Piece occupyingPiece = board[desX][desY].getPiece();
+        //TODO: Structure conditions where canMove is first condition-easier to think through
+        /*if (targetPiece.canMove(board, desX, desY)) {
+
+        }*/
+        //If no piece occupying destination square, check if target piece is able to move
         if (occupyingPiece ==  null && targetPiece.canMove(board, desX, desY)) {
             //Remove target piece from original square
             board[srcX][srcY].removePiece();
@@ -64,7 +69,7 @@ public class Chessboard {
             changeTurn();
             return true;
         }
-        else if (occupyingPiece == null && !targetPiece.canMove(board, desX, desY)) {
+        else if (occupyingPiece ==  null && !targetPiece.canMove(board, desX, desY)) {
             System.out.println("Illegal move");
             return false;
         }
@@ -78,7 +83,7 @@ public class Chessboard {
         //If move is possible and square has enemy piece then move piece to des square and account for kill
         if (targetPiece.canMove(board, desX, desY) && squareOccupied)  {
             String targetName = targetPiece.getName();
-            //Ensure pawn only does diagonalattack (not front etc)
+            //Ensure pawn only does diagonalAttack (not front etc)
             if (targetName.equals("Pawn")) {
                 Pawn targetPawn = (Pawn) targetPiece;
                 //If pawn cannot do diagnoal than stop
@@ -104,6 +109,7 @@ public class Chessboard {
             changeTurn();
             return true;
         }
+        //TODO: See if this block can be removed
         //If move is possible and no enemy piece on destination square
         else if (targetPiece.canMove(board, desX, desY) && !squareOccupied) {
             //Move piece to destination square
