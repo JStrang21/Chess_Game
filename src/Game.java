@@ -33,7 +33,7 @@ public class Game {
     }
 
     public boolean checkWin() {
-
+        printRemovedPieces();
         return false;
     }
 }

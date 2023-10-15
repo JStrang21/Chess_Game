@@ -247,40 +247,45 @@ public class Chessboard {
         return coords;
     }
 
+    public void printBoardTwo() {
+
+    }
+
     public void printBoard() {
         char[] letters = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-        System.out.print("    a");
+        System.out.print("     a");
         for (int k = 1; k < 8; k++) {
-            System.out.print("   " + letters[k]);
+            System.out.print("     " + letters[k]);
         }
         System.out.println();
 
-        System.out.print("   __");
-        for (int i = 0; i < 15; i++) {
-            System.out.print("__");
-        }
-        System.out.println();
+        printHorizontalLines();
 
         for (int i = 0, k = 8; i < 8; i++) {
             System.out.print(k + " |");
             k--;
             for (int j = 0; j < 8; j++) {
                 Piece p = board[i][j].getPiece();
+                System.out.print("  ");
                 if (p == null) {
-                    System.out.print("    ");
+                    System.out.print("   |");
                     continue;
                 }
-                System.out.print(" ");
+                //System.out.print(" ");
                 p.printOnBoard();
-                System.out.print(" ");
+                System.out.print(" |");
             }
-            System.out.println("|");
+            System.out.println();
+            printHorizontalLines();
         }
+    }
 
-        System.out.print("   __");
+    public void printHorizontalLines() {
+        System.out.print("  |__");
         for (int i = 0; i < 15; i++) {
-            System.out.print("__");
+            System.out.print("___");
         }
+        System.out.print("|");
         System.out.println();
     }
 
