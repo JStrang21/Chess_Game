@@ -45,6 +45,7 @@ public class App{
             //TODO account for wrong input: crashes when input is wrong
             if (g.white.isTurn()) {
                 //TODO: check if king can move to square-can not move into a check
+                /*
                 //Check if King is in check
                 boolean whiteKingInCheck = g.board.checkIfWhiteKingInCheck();
                 //Has to move so king is not in check
@@ -56,13 +57,17 @@ public class App{
                     des = input.next();
                     boolean canMove = g.board.movePiece(src, des);
                     whiteKingInCheck = g.board.checkIfWhiteKingInCheck();
-                }
+                    if (whiteKingInCheck == false) {
+                        break;
+                    }
+                }*/
                 System.out.println("White player enter originating piece square: ");
                 src = input.next();
                 System.out.println("Enter destination square: ");
                 des = input.next();
             }
             else if (g.black.isTurn()) {
+                /*
                 //Check if King is in check
                 boolean blackKingInCheck = g.board.checkIfBlackKingInCheck();
                 //Has to move so king is not in check
@@ -74,6 +79,7 @@ public class App{
                     des = input.next();
                     blackKingInCheck = g.board.checkIfBlackKingInCheck();
                 }
+                */
                 System.out.println("Black player enter originating piece square: ");
                 src = input.next();
                 System.out.println("Enter destination square: ");
@@ -85,6 +91,9 @@ public class App{
             g.board.printBoard();
             gameWon = g.checkWin();
             //g.printRemovedPieces();
+        }
+        if (gameWon) {
+            System.out.println(g.board.winner + " wins the game");
         }
         //g.board.movePiece("b7", "b6");
         //g.board.printBoard();

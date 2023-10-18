@@ -307,7 +307,7 @@ public class Chessboard {
         }
     }
 
-    public boolean checkIfWhiteKingInCheck() {
+    /*public boolean checkIfWhiteKingInCheck() {
         //Find kings on board
         King wK = findWhiteKing();
         //Go through all enemy pieces and check if they can take king
@@ -381,7 +381,7 @@ public class Chessboard {
             }
         }
         return null;
-    }
+    }*/
 
     public boolean checkForRemovedKing() {
         //If king is in either lists then game is over
