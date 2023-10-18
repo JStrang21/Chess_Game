@@ -3,9 +3,10 @@ import java.util.LinkedList;
 public class Chessboard {
     //8x8 Board of squares/chessboard
     public Square[][] board = new Square[8][8];
-    public LinkedList<Piece> removedPieces = new LinkedList<Piece>();
+    //public LinkedList<Piece> removedPieces = new LinkedList<Piece>();
     public LinkedList<Piece> removedPiecesWhite = new LinkedList<Piece>();
     public LinkedList<Piece> removedPiecesBlack = new LinkedList<Piece>();
+    String winner = null;
 
     //Ensure correct turns
     boolean whiteTurn = true;
@@ -32,7 +33,7 @@ public class Chessboard {
 
     public boolean movePiece(String src, String des) {
         //String src = srcX and srcY while String des = desX and desY
-        //TODO: converter is wrong
+        //TODO: converter is wrong?
         int[] convertedCoords = convert(src, des);
         int srcX = convertedCoords[0];
         int srcY = convertedCoords[1];
@@ -57,7 +58,7 @@ public class Chessboard {
 
         boolean squareOccupied = board[desX][desY].isOccupied;
         Piece occupyingPiece = board[desX][desY].getPiece();
-        //TODO: Structure conditions where canMove is first condition-easier to think through
+        //TODO: Maybe Structure conditions where canMove is first condition-easier to think through
         /*if (targetPiece.canMove(board, desX, desY)) {
 
         }*/
@@ -95,7 +96,6 @@ public class Chessboard {
                     return false;
                 }
             }
-            //TODO account for enemy killed here: remove piece from des square and place on list of player's dead pieces
             //Add killed piece to white or black list of removed pieces
             if (occupyingPiece.getColorInt() == 1) {
                 removedPiecesWhite.add(occupyingPiece);
@@ -164,7 +164,8 @@ public class Chessboard {
             blackPieces[i].setCoords(7, i);
         }
         //Place pawns
-        for (int i = 0; i < 8; i++) {
+        //TODO: remove pawns to test easier
+        /*for (int i = 0; i < 8; i++) {
             //Add piece to appropriate starting square
             board[1][i].addPiece(whitePieces[i + 8]);
             //Set piece coordinates
@@ -174,7 +175,7 @@ public class Chessboard {
             board[6][i].addPiece(blackPieces[i + 8]);
             //Set piece coordinates
             blackPieces[i + 8].setCoords(6, i);
-        }
+        }*/
     }
 
     public Piece[] createPieces(Piece[] pieces, int color) {
@@ -306,15 +307,93 @@ public class Chessboard {
         }
     }
 
-    public boolean checkForKing() {
+    public boolean checkIfWhiteKingInCheck() {
+        //Find kings on board
+        King wK = findWhiteKing();
+        //Go through all enemy pieces and check if they can take king
+        int kingX = wK.curX;
+        int kingY = wK.curY;
+        //Iterate over board
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                //Check if square has piece occupying it
+                if (board[i][j].isOccupied) {
+                    //If there is a piece
+                    Piece targetPiece = board[i][j].getPiece();
+                    //If piece is black and can move to king position then king is in check
+                    if (targetPiece.getColorInt() == 2 && targetPiece.canMove(board, kingX, kingY)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfBlackKingInCheck() {
+        //Find kings on board
+        King bK = findBlackKing();
+        //Go through all enemy pieces and check if they can take king
+        int kingX = bK.curX;
+        int kingY = bK.curY;
+        //Iterate over board
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                //Check if square has piece occupying it
+                if (board[i][j].isOccupied) {
+                    //If there is a piece
+                    Piece targetPiece = board[i][j].getPiece();
+                    //If piece is black and can move to king position then king is in check
+                    if (targetPiece.getColorInt() == 1 && targetPiece.canMove(board, kingX, kingY)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public King findWhiteKing() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Piece occupying = board[i][j].getPiece();
+                if (occupying == null) {
+                    continue;
+                }
+                else if (occupying.getNameString().equals("King") && occupying.getColorInt() == 1) {
+                    return (King) occupying;
+                }
+            }
+        }
+        return null;
+    }
+
+    public King findBlackKing() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Piece occupying = board[i][j].getPiece();
+                if (occupying == null) {
+                    continue;
+                }
+                else if (occupying.getNameString().equals("King") && occupying.getColorInt() == 2) {
+                    return (King) occupying;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean checkForRemovedKing() {
         //If king is in either lists then game is over
         for (Piece p : removedPiecesWhite) {
             if (p.getNameString().equals("King")) {
+                winner = "White";
                 return true;
             }
         }
         for (Piece p : removedPiecesBlack) {
             if (p.getNameString().equals("King")) {
+                winner = "Black";
                 return true;
             }
         }

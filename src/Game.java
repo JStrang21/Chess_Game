@@ -4,7 +4,6 @@ public class Game {
     Chessboard board;
     boolean won = false;
 
-
     public Game(int i) {
         //Substantiate playerOne with 1 as paramater to indicate that it's the human player
         if (i == 1) {
@@ -26,24 +25,34 @@ public class Game {
         }
     }
 
-    public void printRemovedPieces() {
+    /*public void printRemovedPieces() {
         for (Piece p : board.removedPieces) {
             System.out.println(p.getColor() + " " + p.getNameString());
         }
-    }
+    }*/
 
     public boolean checkWin() {
         //printRemovedPieces();
         //TODO: Checkmate logic
         //If either list of removed pieces has 16 that means all pieces of that side have been taken
-        if (board.removedPiecesWhite.size() == 16 || board.removedPiecesBlack.size() == 16) {
+        if (board.removedPiecesWhite.size() == 16) {
+            won = true;
+            board.winner = "White";
+            return true;
+        }
+        if (board.removedPiecesBlack.size() == 16) {
+            won = true;
+            board.winner = "Black";
             return true;
         }
 
         //Check for king in lists
-        if (board.checkForKing()) {
-
+        if (board.checkForRemovedKing()) {
+            won = true;
+            return true;
         }
+
+
         return false;
     }
 }

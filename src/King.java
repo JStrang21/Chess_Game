@@ -22,6 +22,10 @@ public class King extends Piece{
         return true;
     }
 
+    public boolean isInCheck() {
+        return false;
+    }
+
     public String getName() {
         return name;
     }
