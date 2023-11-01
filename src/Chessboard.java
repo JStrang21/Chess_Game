@@ -307,82 +307,6 @@ public class Chessboard {
         }
     }
 
-    /*public boolean checkIfWhiteKingInCheck() {
-        //Find kings on board
-        King wK = findWhiteKing();
-        //Go through all enemy pieces and check if they can take king
-        int kingX = wK.curX;
-        int kingY = wK.curY;
-        //Iterate over board
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                //Check if square has piece occupying it
-                if (board[i][j].isOccupied) {
-                    //If there is a piece
-                    Piece targetPiece = board[i][j].getPiece();
-                    //If piece is black and can move to king position then king is in check
-                    if (targetPiece.getColorInt() == 2 && targetPiece.canMove(board, kingX, kingY)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean checkIfBlackKingInCheck() {
-        //Find kings on board
-        King bK = findBlackKing();
-        //Go through all enemy pieces and check if they can take king
-        int kingX = bK.curX;
-        int kingY = bK.curY;
-        //Iterate over board
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                //Check if square has piece occupying it
-                if (board[i][j].isOccupied) {
-                    //If there is a piece
-                    Piece targetPiece = board[i][j].getPiece();
-                    //If piece is black and can move to king position then king is in check
-                    if (targetPiece.getColorInt() == 1 && targetPiece.canMove(board, kingX, kingY)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-
-    public King findWhiteKing() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                Piece occupying = board[i][j].getPiece();
-                if (occupying == null) {
-                    continue;
-                }
-                else if (occupying.getNameString().equals("King") && occupying.getColorInt() == 1) {
-                    return (King) occupying;
-                }
-            }
-        }
-        return null;
-    }
-
-    public King findBlackKing() {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                Piece occupying = board[i][j].getPiece();
-                if (occupying == null) {
-                    continue;
-                }
-                else if (occupying.getNameString().equals("King") && occupying.getColorInt() == 2) {
-                    return (King) occupying;
-                }
-            }
-        }
-        return null;
-    }*/
-
     public boolean checkForRemovedKing() {
         //If king is in either lists then game is over
         for (Piece p : removedPiecesWhite) {
@@ -397,6 +321,153 @@ public class Chessboard {
                 return true;
             }
         }
+        return false;
+    }
+
+    public boolean inCheckMate() {
+        //Get each king
+        King king = null;
+        if (white.isTurn()) {
+            king = getWhiteKing();
+        }
+        else {
+            king = getBlackKing();
+        }
+        //Check if king is in check
+        int curX = king.curX;
+        int curY = king.curY;
+        if (king.isInCheck(board, curX, curY)) {
+            //If king is in check and has not way to move out then checkmate
+            for (int i = -1; i < 2; i ++) {
+                for (int j = -1; j < 2; j++) {
+                    int desY = curY + j;
+                    int desX = curX + i;
+                    if (king.canMove(board, desX, desY)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public King getWhiteKing() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Piece occupying = board[i][j].getPiece();
+                if (occupying == null) {
+                    continue;
+                }
+                else if (occupying.getNameString().equals("King") && occupying.getColorInt() == 1) {
+                    return (King) occupying;
+                }
+            }
+        }
+        return null;
+    }
+
+    public King getBlackKing() {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Piece occupying = board[i][j].getPiece();
+                if (occupying == null) {
+                    continue;
+                }
+                else if (occupying.getNameString().equals("King") && occupying.getColorInt() == 2) {
+                    return (King) occupying;
+                }
+            }
+        }
+        return null;
+    }
+
+    public boolean moveOutOfCheck(String src, String des) {
+        int[] convertedCoords = convert(src, des);
+        int srcX = convertedCoords[0];
+        int srcY = convertedCoords[1];
+        int desX = convertedCoords[2];
+        int desY = convertedCoords[3];
+        //Player decides where to move piece, board checks if move is possible given the specific pieces movement
+        //Get target piece from inputted x and y
+        Piece targetPiece = board[srcX][srcY].getPiece();
+        if (targetPiece == null) {
+            System.out.println("No piece at selected square");
+            return false;
+        }
+
+        boolean squareOccupied = board[desX][desY].isOccupied;
+        Piece occupyingPiece = board[desX][desY].getPiece();
+
+        //If no piece occupying destination square, check if target piece is able to move
+        if (occupyingPiece ==  null && targetPiece.canMove(board, desX, desY)) {
+            /*//Remove target piece from original square
+            board[srcX][srcY].removePiece();
+            //Move target piece to dest square
+            board[desX][desY].addPiece(targetPiece);
+            //Updated piece coords
+            targetPiece.setCoords(desX, desY);
+            changeTurn();*/
+            return true;
+        }
+        else if (occupyingPiece ==  null && !targetPiece.canMove(board, desX, desY)) {
+            System.out.println("Illegal move");
+            return false;
+        }
+        //If color of piece occupying destination square is same color, then cannot move there
+        //Might not need second condition (&& squareOccupied) because first condition would satisfy: test
+        if ((targetPiece.getColorInt() == occupyingPiece.getColorInt()) && squareOccupied) {
+            System.out.println("Cannot move to square occupied by allied piece");
+            return false;
+        }
+
+        //If move is possible and square has enemy piece then move piece to des square and account for kill
+        if (targetPiece.canMove(board, desX, desY) && squareOccupied)  {
+            String targetName = targetPiece.getName();
+            //Ensure pawn only does diagonalAttack (not front etc)
+            if (targetName.equals("Pawn")) {
+                Pawn targetPawn = (Pawn) targetPiece;
+                //If pawn cannot do diagnoal than stop
+                if (targetPawn.diagonalAttack == false) {
+                    System.out.println("Pawn cannot move forward onto a square occupied by another piece");
+                    return false;
+                }
+            }
+            //Add killed piece to white or black list of removed pieces
+            if (occupyingPiece.getColorInt() == 1) {
+                removedPiecesWhite.add(occupyingPiece);
+            }
+            else {
+                removedPiecesBlack.add(occupyingPiece);
+            }
+            //TODO: print what piece was taken
+            //Remove piece from board
+            board[desX][desY].removePiece();
+            //Update its coords
+            occupyingPiece.setCoords(10, 10);
+
+            //Remove target piece from original square
+            board[srcX][srcY].removePiece();
+            //Move target piece to dest square
+            board[desX][desY].addPiece(targetPiece);
+            //Updated piece coords
+            targetPiece.setCoords(desX, desY);
+            changeTurn();
+            return true;
+        }
+        //TODO: See if this block can be removed
+        //If move is possible and no enemy piece on destination square
+        else if (targetPiece.canMove(board, desX, desY) && !squareOccupied) {
+            //Move piece to destination square
+            board[desX][desY].addPiece(targetPiece);
+            //Updated piece coords
+            targetPiece.setCoords(desX, desY);
+            //Remove piece from previous square
+            board[srcX][srcY].removePiece();
+            changeTurn();
+            return true;
+        }
+        //Else return false and piece stays in square
         return false;
     }
 }

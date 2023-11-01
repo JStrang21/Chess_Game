@@ -46,6 +46,17 @@ public class Game {
             return true;
         }
 
+        //TODO: not working
+        /*if (board.inCheckMate()) {
+            won = true;
+            if (board.black.isTurn()) {
+                board.winner = "White";
+            }
+            else {
+                board.winner = "Black";
+            }
+            return true;
+        }*/
         //Check for king in lists
         if (board.checkForRemovedKing()) {
             won = true;

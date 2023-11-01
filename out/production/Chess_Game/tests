@@ -1,3 +1,51 @@
+    /*public boolean checkIfWhiteKingInCheck() {
+            //Find kings on board
+            King wK = findWhiteKing();
+            //Go through all enemy pieces and check if they can take king
+            int kingX = wK.curX;
+            int kingY = wK.curY;
+            //Iterate over board
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    //Check if square has piece occupying it
+                    if (board[i][j].isOccupied) {
+                        //If there is a piece
+                        Piece targetPiece = board[i][j].getPiece();
+                        //If piece is black and can move to king position then king is in check
+                        if (targetPiece.getColorInt() == 2 && targetPiece.canMove(board, kingX, kingY)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public boolean checkIfBlackKingInCheck() {
+            //Find kings on board
+            King bK = findBlackKing();
+            //Go through all enemy pieces and check if they can take king
+            int kingX = bK.curX;
+            int kingY = bK.curY;
+            //Iterate over board
+            for (int i = 0; i < 8; i++) {
+                for (int j = 0; j < 8; j++) {
+                    //Check if square has piece occupying it
+                    if (board[i][j].isOccupied) {
+                        //If there is a piece
+                        Piece targetPiece = board[i][j].getPiece();
+                        //If piece is black and can move to king position then king is in check
+                        if (targetPiece.getColorInt() == 1 && targetPiece.canMove(board, kingX, kingY)) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }*/
+
+
+
     //Pawn tests
     //Additional pawns to add
     /*    Piece blackPawn = new Pawn(2);

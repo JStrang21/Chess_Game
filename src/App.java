@@ -38,14 +38,55 @@ public class App{
         //While game has not been won continue game
         boolean gameWon = false;
         while (!gameWon) {
-            //TODO:
             Scanner input = new Scanner(System.in);
             String src = null;
             String des = null;
             //TODO account for wrong input: crashes when input is wrong
             if (g.white.isTurn()) {
-                //TODO: check if king can move to square-can not move into a check
-                /*
+                /*boolean kingInCheck = g.white.inCheck(g.board, 1);
+                if (kingInCheck) {
+                    System.out.println("White King in check, must get king out of check");
+                }*/
+                System.out.println("White player enter originating piece square: ");
+                src = input.next();
+                System.out.println("Enter destination square: ");
+                des = input.next();
+
+            }
+            else if (g.black.isTurn()) {
+                /*boolean kingInCheck = g.black.inCheck(g.board, 2);
+                if (g.black.inCheck(g.board, 2)) {
+                    System.out.println("Black King in check, must get king out of check");
+                }*/
+                System.out.println("Black player enter originating piece square: ");
+                src = input.next();
+                System.out.println("Enter destination square: ");
+                des = input.next();
+            }
+            //TODO: add stalemate, checkMate logic
+
+            g.board.movePiece(src, des);
+            g.board.printBoard();
+            //Maybe check for check after movement
+            if (g.white.inCheck(g.board, 1)) {
+                
+            }
+            else if (g.black.inCheck(g.board, 2)) {
+
+            }
+            gameWon = g.checkWin();
+            //g.printRemovedPieces();
+        }
+        if (gameWon) {
+            System.out.println(g.board.winner + " wins the game");
+        }
+    }
+
+}
+
+
+
+/*
                 //Check if King is in check
                 boolean whiteKingInCheck = g.board.checkIfWhiteKingInCheck();
                 //Has to move so king is not in check
@@ -61,43 +102,4 @@ public class App{
                         break;
                     }
                 }*/
-                System.out.println("White player enter originating piece square: ");
-                src = input.next();
-                System.out.println("Enter destination square: ");
-                des = input.next();
-            }
-            else if (g.black.isTurn()) {
-                /*
-                //Check if King is in check
-                boolean blackKingInCheck = g.board.checkIfBlackKingInCheck();
-                //Has to move so king is not in check
-                while (blackKingInCheck) {
-                    System.out.println("Black king is in check, must get out of check");
-                    System.out.println("Enter originating piece square");
-                    src = input.next();
-                    System.out.println("Enter destination square");
-                    des = input.next();
-                    blackKingInCheck = g.board.checkIfBlackKingInCheck();
-                }
-                */
-                System.out.println("Black player enter originating piece square: ");
-                src = input.next();
-                System.out.println("Enter destination square: ");
-                des = input.next();
-            }
-
-            //TODO: add stalemate, checkMate logic
-            g.board.movePiece(src, des);
-            g.board.printBoard();
-            gameWon = g.checkWin();
-            //g.printRemovedPieces();
-        }
-        if (gameWon) {
-            System.out.println(g.board.winner + " wins the game");
-        }
-        //g.board.movePiece("b7", "b6");
-        //g.board.printBoard();
-    }
-
-}
 
