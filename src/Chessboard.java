@@ -396,7 +396,7 @@ public class Chessboard {
             for (int j = -1; j < 2; j++) {
                 int tempX = srcX + i;
                 int tempY = srcY + j;
-                if (tempX > 8 || tempY > 8 || tempX < 0 || tempY < 0) {
+                if (tempX >= 8 || tempY >= 8 || tempX < 0 || tempY < 0) {
                     continue;
                 }
                 else if ((i == 0) && (j == 0)) {
