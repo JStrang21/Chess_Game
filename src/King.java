@@ -17,8 +17,15 @@ public class King extends Piece{
         if (Math.abs(desX - curX) > 1 || Math.abs(desY - curY) > 1) {
             return false;
         }
+        //Cant move into check
         if (isInCheck(b, desX, desY)) {
             System.out.println("Cannot move King into check");
+            return false;
+        }
+        if (occupyingPiece == null) {
+            return true;
+        }
+        if (occupyingPiece.getColorInt() == color) {
             return false;
         }
         return true;
@@ -47,35 +54,4 @@ public class King extends Piece{
     public String getName() {
         return name;
     }
-
-    /*public void printPiece() {
-        System.out.println();
-    }
-
-    *public boolean traceMovement() {
-        return false;
-    }
-
-    public void name() {
-        System.out.println(name);
-    }
-    public void printTest() {
-        System.out.println("Hello");
-    }
-
-    boolean tracePath(int destX, int destY) {
-
-        return false;
-    }*/
-
-    /*public String getColor() {
-        if (color == 1) {
-            return "White";
-        }
-        return "Black";
-    }
-
-    public int getColorInt() {
-        return color;
-    }*/
 }

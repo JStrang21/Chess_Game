@@ -3,10 +3,20 @@ public class Player {
     public boolean human;
     int color;
     boolean turn;
+    boolean inCheck;
 
     public Player(int i) {
         //If player is instantiated with i as paramater rather than no parameter than that object is human playable
         human = true;
+    }
+
+    public boolean isInCheck(Chessboard board) {
+        if (inCheck(board, color)) {
+            inCheck = true;
+            return false;
+        }
+        inCheck = false;
+        return false;
     }
 
     public boolean isTurn() {

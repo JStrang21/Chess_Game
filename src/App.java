@@ -42,40 +42,78 @@ public class App{
             String src = null;
             String des = null;
             //TODO account for wrong input: crashes when input is wrong
+            //Check logic: iterate through all possible moves for all pieces and check which moves get king out of check->if inputed move is same as one in list then acceptable move
+            //List possible moves for piece that threatens king and possible moves for king and the spots king can move are available
             if (g.white.isTurn()) {
-                /*boolean kingInCheck = g.white.inCheck(g.board, 1);
-                if (kingInCheck) {
-                    System.out.println("White King in check, must get king out of check");
-                }*/
-                System.out.println("White player enter originating piece square: ");
-                src = input.next();
-                System.out.println("Enter destination square: ");
-                des = input.next();
-
+                g.white.isInCheck(g.board);
+                if (g.white.inCheck) {
+                    while (g.white.inCheck) {
+                        System.out.println("White King in check, must get king out of check");
+                        System.out.println("White player enter originating piece square: ");
+                        src = input.next();
+                        System.out.println("Enter destination square: ");
+                        des = input.next();
+                        if (g.board.movedOutOfCheck(src, des)) {
+                            g.white.inCheck = false;
+                            g.board.movePiece(src, des);
+                            g.board.printBoard();
+                            gameWon = g.checkWin();
+                        }
+                        else {
+                            src = null;
+                            des = null;
+                        }
+                    }
+                }
+                else {
+                    System.out.println("White player enter originating piece square: ");
+                    src = input.next();
+                    System.out.println("Enter destination square: ");
+                    des = input.next();
+                    g.board.movePiece(src, des);
+                    g.board.printBoard();
+                    gameWon = g.checkWin();
+                }
             }
             else if (g.black.isTurn()) {
-                /*boolean kingInCheck = g.black.inCheck(g.board, 2);
-                if (g.black.inCheck(g.board, 2)) {
-                    System.out.println("Black King in check, must get king out of check");
-                }*/
-                System.out.println("Black player enter originating piece square: ");
-                src = input.next();
-                System.out.println("Enter destination square: ");
-                des = input.next();
+                g.black.isInCheck(g.board);
+                if (g.black.inCheck) {
+                    while (g.black.inCheck) {
+                        System.out.println("Black King in check, must get king out of check");
+                        System.out.println("Black player enter originating piece square: ");
+                        src = input.next();
+                        System.out.println("Enter destination square: ");
+                        des = input.next();
+                        if (g.board.movedOutOfCheck(src, des)) {
+                            g.black.inCheck = false;
+                            g.board.movePiece(src, des);
+                            g.board.printBoard();
+                            gameWon = g.checkWin();
+                        }
+                        else {
+                            src = null;
+                            des = null;
+                        }
+                    }
+                }
+                else {
+                    System.out.println("Black player enter originating piece square: ");
+                    src = input.next();
+                    System.out.println("Enter destination square: ");
+                    des = input.next();
+                    g.board.movePiece(src, des);
+                    g.board.printBoard();
+                    gameWon = g.checkWin();
+                }
             }
             //TODO: add stalemate, checkMate logic
 
-            g.board.movePiece(src, des);
+            /*g.board.movePiece(src, des);
             g.board.printBoard();
-            //Maybe check for check after movement
-            if (g.white.inCheck(g.board, 1)) {
-                
-            }
-            else if (g.black.inCheck(g.board, 2)) {
-
-            }
             gameWon = g.checkWin();
             //g.printRemovedPieces();
+
+             */
         }
         if (gameWon) {
             System.out.println(g.board.winner + " wins the game");
