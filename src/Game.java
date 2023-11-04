@@ -69,7 +69,7 @@ public class Game {
         return false;
     }
 
-    public void inCheckBlock(int color, String src, String des, Scanner input) {
+    /*public void inCheckBlock(int color, String src, String des, Scanner input) {
         if (color == 1) {
             System.out.println("White King in check, must get king out of check");
             System.out.println("White player enter originating piece square: ");
@@ -103,4 +103,6 @@ public class Game {
         board.printBoard();
         gameWon = checkWin();
     }
+
+     */
 }
