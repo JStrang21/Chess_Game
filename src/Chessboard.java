@@ -381,14 +381,20 @@ public class Chessboard {
         int srcY = convertedCoords[1];
         int desX = convertedCoords[2];
         int desY = convertedCoords[3];
-        //Player decides where to move piece, board checks if move is possible given the specific pieces movement
-        //Get target piece from inputted x and y
+        //Check if piece selected is King, if not king check if moving that piece to des square stops check
+        Piece allyPiece = board[srcX][srcY].getPiece();
+        if (!allyPiece.getNameString().equals("King")) {
+
+        }
+
+        //Only get to this if piece selected is king
         Piece king = board[srcX][srcY].getPiece();
         //Ensure selected piece is king in check
         if (!king.getNameString().equals("King")) {
             return false;
         }
 
+        //TODO: Move all these loops to seperate functions
         //Find all moves possible for king and add to 2D array
         int[][] kingPossibleMoves = new int[8][2];
         int count = 0;
@@ -434,9 +440,6 @@ public class Chessboard {
             }
         }
 
-        //Sort arrays
-        //Arrays.sort(kingPossibleMoves, (a, b) -> Integer.compare(a[0], b[0]));
-        //Arrays.sort(checkingPossibleMoves, (a, b) -> Integer.compare(a[0], b[0]));
         int[][] goodMoves = new int[8][2];
 
         //Compare two arrays and king potential move isn't in checkingPossibleMoves then it is a safe move
@@ -460,42 +463,8 @@ public class Chessboard {
                 goodMoves[goodCount][1] = kingPossibleMoves[j][1];
                 goodCount++;
             }
-                /*if ((checkingPossibleMoves[i][0] != kingPossibleMoves[j][0]) || (checkingPossibleMoves[i][1] != kingPossibleMoves[j][1])) {
-                    goodMoves[goodCount][0] = kingPossibleMoves[j][0];
-                    goodMoves[goodCount][1] = kingPossibleMoves[j][1];
-                    goodCount++;
-                }*/
         }
-
-        //Iterate over checkingPossibleMoves
-
-        /*
-        for (int i = 0; i < 30; i++) {
-            //Iterate over kingPossibleMoves
-            for (int j = 0; j < 8; j++) {
-                //TODO: Might be an edge case for corner of board
-                if (((i == 0) && (j == 0)) || ((checkingPossibleMoves[i][0] == 0) && (checkingPossibleMoves[i][1] == 0)))  {
-                    continue;
-                }
-                int one  = kingPossibleMoves[j][0];
-                int two = kingPossibleMoves[j][1];
-                int[] coord = {one, two};
-                if (Arrays.stream(checkingPossibleMoves).anyMatch(e -> Arrays.equals(e, coord))) {
-                    goodMoves[goodCount][0] = kingPossibleMoves[j][0];
-                    goodMoves[goodCount][1] = kingPossibleMoves[j][1];
-                    goodCount++;
-                }
-                if ((checkingPossibleMoves[i][0] != kingPossibleMoves[j][0]) || (checkingPossibleMoves[i][1] != kingPossibleMoves[j][1])) {
-                    goodMoves[goodCount][0] = kingPossibleMoves[j][0];
-                    goodMoves[goodCount][1] = kingPossibleMoves[j][1];
-                    goodCount++;
-                }
-            }
-
-        }
-
-
-         */
+        
         //Check if player entered correct move
         for (int i = 0; i < 8; i++) {
             if (goodMoves[i][0] == desX && goodMoves[i][1] == desY) {
