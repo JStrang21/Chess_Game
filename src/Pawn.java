@@ -27,10 +27,13 @@ public class Pawn extends Piece {
             System.out.println("Can not move pawn backwards/sideways");
             return false;
         }
+        /*
         //Cannot move more than two spaces after first move
         if (occupyingPiece == null && Math.abs(curX - desX) > 1 && isFirstMove == false) {
             return false;
         }
+
+         */
         //If no occupying piece
         if (occupyingPiece == null && Math.abs(curY - desY) == 0 && Math.abs(curX - desX) == 2 && isFirstMove) {
             isFirstMove = false;
@@ -53,6 +56,27 @@ public class Pawn extends Piece {
         //TODO account for en passant
         if (desY == curY) {
             //If first move of pawn than 2 squares allowed (second condition bc only allowed when not using diagonal attack)
+            if (Math.abs(desX - curX) == 2) {
+                if (color == 1 && curX == 1) {
+                    //Check if other pieces between
+                    if (b[curX + 1][curY].isOccupied) {
+                        //If a piece is between than cannot move
+                        return false;
+                    }
+                    isFirstMove = false;
+                    return true;
+                }
+                else if (color == 2 && curX == 6) {
+                    //Check if other pieces between
+                    if (b[curX - 1][curY].isOccupied || b[curX - 2][curY].isOccupied) {
+                        //If a piece is between than cannot move
+                        return false;
+                    }
+                    isFirstMove = false;
+                    return true;
+                }
+            }
+            /*
             if (Math.abs(desX - curX) == 2 && isFirstMove) {
                 //Check if other pieces between
                 if (b[curX + 1][curY].isOccupied) {
@@ -62,32 +86,10 @@ public class Pawn extends Piece {
                 isFirstMove = false;
                 return true;
             }
+            */
             else if (Math.abs(desX - curX) == 1 && occupyingPiece != null) {
                 return false;
             }
-            /*
-            //For pawn promotion
-            else if (Math.abs(desX - curX) == 1 && occupyingPiece == null && ((desX == 8) || (desX == 0))) {
-                Scanner input = new Scanner(System.in);
-                //If white pawn reaches opposite side
-                if (color == 1 && desX == 7) {
-                    //Ask player which piece
-                    System.out.println("Pawn promoted, type capitol first letter of desired piece: ");
-                    System.out.println("Options include: Queen, Rook, Bishop, and Knight");
-                    //char firstLetter = input.next(".").charAt(0);
-                    //TODO: make sure this works
-                    char firstLetter = 'A';
-                    while (checkFirstLetter(firstLetter)) {
-                        firstLetter = input.next(".").charAt(0);
-                    }
-
-                }
-                else if (color == 2 && desX == 0) {
-
-                }
-            }
-
-             */
             //If just moving one square
             else if (Math.abs(desX - curX) == 1) {
                 return true;
@@ -107,6 +109,7 @@ public class Pawn extends Piece {
                 return false;
             }
         }
+        return false;
     }
 
     @Override

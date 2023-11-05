@@ -474,6 +474,25 @@ public class Chessboard {
         //Check if piece selected is King, if not king check if moving that piece to des square stops check
         Piece allyPiece = board[srcX][srcY].getPiece();
         if (!allyPiece.getNameString().equals("King")) {
+            //Get colors && ally king
+            int allyColor = allyPiece.getColorInt();
+            int opposingColor;
+            King allyKing = null;
+            if (allyColor == 1) {
+                opposingColor = 2;
+                allyKing = getWhiteKing();
+            }
+            else {
+                opposingColor = 1;
+                allyKing = getBlackKing();
+            }
+            //Find piece checking king
+            Piece checkingPiece = findCheckingPiece(board, allyKing, opposingColor);
+            //If allyPiece can move to square with piece checking then it will stop check
+            if (allyPiece.canMove(board, desX, desY) && desX == checkingPiece.curX && desY == checkingPiece.curY) {
+                return true;
+            }
+            //TODO: Check if ally piece blocks check
 
         }
 
