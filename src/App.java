@@ -41,6 +41,9 @@ public class App{
             Scanner input = new Scanner(System.in);
             String src = null;
             String des = null;
+
+            //TODO: make inCheckBlock and nonCheckBlock return src and des moves to moves[]
+            String[] moves = new String[2];
             //TODO account for wrong input: crashes when input is wrong
             //Check logic: iterate through all possible moves for all pieces and check which moves get king out of check->if inputed move is same as one in list then acceptable move
             //List possible moves for piece that threatens king and possible moves for king and the spots king can move are available
@@ -125,22 +128,4 @@ public class App{
     }
 }
 
-
-
-/*
-                //Check if King is in check
-                boolean whiteKingInCheck = g.board.checkIfWhiteKingInCheck();
-                //Has to move so king is not in check
-                while (whiteKingInCheck) {
-                    System.out.println("White king is in check, must get out of check");
-                    System.out.println("Enter originating piece square");
-                    src = input.next();
-                    System.out.println("Enter destination square");
-                    des = input.next();
-                    boolean canMove = g.board.movePiece(src, des);
-                    whiteKingInCheck = g.board.checkIfWhiteKingInCheck();
-                    if (whiteKingInCheck == false) {
-                        break;
-                    }
-                }*/
 

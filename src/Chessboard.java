@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Scanner;
 
 public class Chessboard {
     //8x8 Board of squares/chessboard
@@ -59,10 +60,79 @@ public class Chessboard {
 
         boolean squareOccupied = board[desX][desY].isOccupied;
         Piece occupyingPiece = board[desX][desY].getPiece();
-        //TODO: Maybe Structure conditions where canMove is first condition-easier to think through
-        /*if (targetPiece.canMove(board, desX, desY)) {
+        //TODO: fix pawnfirstmove-inCheck fn which checks all pieces turns it from t to f even though it hasn't moved
+        //For Pawn Promotion
+        if (targetPiece.getNameString().equals("Pawn") && targetPiece.canMove(board, desX, desY)) {
+            Pawn targetPawn = (Pawn) targetPiece;
+            if (Math.abs(desX - srcX) == 1 && ((desX == 7) || (desX == 0))) {
+                if (targetPawn.diagonalAttack == false) {
+                    System.out.println("Pawn cannot move forward onto a square occupied by another piece");
+                    return false;
+                }
+                Scanner input = new Scanner(System.in);
+                //Ask player which piece
+                System.out.println("Pawn promoted, type capitol first letter of desired piece: ");
+                System.out.println("Options include: Queen, Rook, Bishop, and Knight");
+                //char firstLetter = input.next(".").charAt(0);
+                //TODO: make sure this works
+                char firstLetter = 'A';
+                while (!checkFirstLetter(firstLetter)) {
+                    firstLetter = input.next(".").charAt(0);
+                }
 
-        }*/
+                occupyingPiece.setCoords(10, 10);
+                board[desX][desY].removePiece();
+                Piece newPiece = createNewPiece(firstLetter, targetPawn.getColorInt(), desX, desY);
+                //Remove target piece from original square
+                board[srcX][srcY].removePiece();
+                //Move new piece to dest square
+                board[desX][desY].addPiece(newPiece);
+                newPiece.setCoords(desX, desY);
+                changeTurn();
+                return true;
+                /*
+                //If white pawn reaches opposite side
+                if (desX == 7 || desX == 0) {
+                    //Ask player which piece
+                    System.out.println("Pawn promoted, type capitol first letter of desired piece: ");
+                    System.out.println("Options include: Queen, Rook, Bishop, and Knight");
+                    //char firstLetter = input.next(".").charAt(0);
+                    //TODO: make sure this works
+                    char firstLetter = 'A';
+                    while (checkFirstLetter(firstLetter)) {
+                        firstLetter = input.next(".").charAt(0);
+                    }
+
+                    Piece newPiece = createNewPiece(firstLetter, targetPawn.getColorInt(), desX, desY);
+                    targetPiece = newPiece;
+                    board[srcX][srcY].removePiece();
+                    //targetPiece.setCoords(desX, desY);
+                    changeTurn();
+                    return true;
+
+                }
+                /*else if (targetPawn.color == 2 && desX == 0) {
+                    //Ask player which piece
+                    System.out.println("Pawn promoted, type capitol first letter of desired piece: ");
+                    System.out.println("Options include: Queen, Rook, Bishop, and Knight");
+                    //char firstLetter = input.next(".").charAt(0);
+                    //TODO: make sure this works
+                    char firstLetter = 'A';
+                    while (checkFirstLetter(firstLetter)) {
+                        firstLetter = input.next(".").charAt(0);
+                    }
+
+                    Piece newPiece = createNewPiece(firstLetter, targetPawn.getColorInt(), desX, desY);
+                    targetPiece = newPiece;
+                    board[srcX][srcY].removePiece();
+                    //targetPiece.setCoords(desX, desY);
+                    changeTurn();
+                    return true;
+                }*/
+            }
+        }
+
+        //TODO: Maybe Structure conditions where canMove is first condition-easier to think through
         //If no piece occupying destination square, check if target piece is able to move
         if (occupyingPiece ==  null && targetPiece.canMove(board, desX, desY)) {
             //Remove target piece from original square
@@ -166,7 +236,7 @@ public class Chessboard {
         }
         //Place pawns
         //TODO: remove pawns to test easier
-        /*for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {
             //Add piece to appropriate starting square
             board[1][i].addPiece(whitePieces[i + 8]);
             //Set piece coordinates
@@ -176,7 +246,27 @@ public class Chessboard {
             board[6][i].addPiece(blackPieces[i + 8]);
             //Set piece coordinates
             blackPieces[i + 8].setCoords(6, i);
-        }*/
+        }
+    }
+
+    public Piece createNewPiece(char firstLetter, int color, int desX, int desY) {
+        //char[] allFirstLetters = {'Q', 'R', 'B', 'K'};
+        Piece newPiece = null;
+        if (firstLetter == 'Q') {
+            newPiece = new Queen(color);
+        }
+        else if (firstLetter == 'R') {
+            newPiece = new Rook(color);
+        }
+        else if (firstLetter == 'B') {
+            newPiece = new Bishop(color);
+        }
+        else if (firstLetter == 'K') {
+            newPiece = new Knight(color);
+        }
+        newPiece.curX = desX;
+        newPiece.curY = desY;
+        return newPiece;
     }
 
     public Piece[] createPieces(Piece[] pieces, int color) {
@@ -496,104 +586,14 @@ public class Chessboard {
         return null;
     }
 
-    public int getArrayLength(int[][] array) {
-        for (int i = 0; i < array.length; i++) {
-            /*if (i == 0 && array[i][0] == 0 && array[i][1] == 0) {
-                continue;
-            }*/
-            if (array[i][0] == 0 && array[i][1] == 0) {
-                return i;
+    public boolean checkFirstLetter(char firstLetter) {
+        char[] listOfAcceptable = {'Q', 'R', 'B', 'K'};
+        for (int i = 0; i < listOfAcceptable.length; i++) {
+            if (firstLetter == listOfAcceptable[i]) {
+                return true;
             }
         }
-        return array.length;
-    }
-
-
-    /*public boolean canMoveTest(int srcx, int srcy, int desx, int desy) {
-
-        int srcX = srcx;
-        int srcY = srcy;
-        int desX = desx;
-        int desY = desy;
-        //Player decides where to move piece, board checks if move is possible given the specific pieces movement
-        //Get target piece from inputted x and y
-        Piece targetPiece = board[srcX][srcY].getPiece();
-        if (targetPiece == null) {
-            System.out.println("No piece at selected square");
-            return false;
-        }
-
-
-        //If no piece occupying destination square, check if target piece is able to move
-        if (occupyingPiece ==  null && targetPiece.canMove(board, desX, desY)) {
-            //Remove target piece from original square
-            board[srcX][srcY].removePiece();
-            //Move target piece to dest square
-            board[desX][desY].addPiece(targetPiece);
-            //Updated piece coords
-            targetPiece.setCoords(desX, desY);
-            changeTurn();
-            return true;
-        }
-        else if (occupyingPiece ==  null && !targetPiece.canMove(board, desX, desY)) {
-            System.out.println("Illegal move");
-            return false;
-        }
-        //If color of piece occupying destination square is same color, then cannot move there
-        //Might not need second condition (&& squareOccupied) because first condition would satisfy: test
-        if ((targetPiece.getColorInt() == occupyingPiece.getColorInt()) && squareOccupied) {
-            System.out.println("Cannot move to square occupied by allied piece");
-            return false;
-        }
-
-        //If move is possible and square has enemy piece then move piece to des square and account for kill
-        if (targetPiece.canMove(board, desX, desY) && squareOccupied)  {
-            String targetName = targetPiece.getName();
-            //Ensure pawn only does diagonalAttack (not front etc)
-            if (targetName.equals("Pawn")) {
-                Pawn targetPawn = (Pawn) targetPiece;
-                //If pawn cannot do diagnoal than stop
-                if (targetPawn.diagonalAttack == false) {
-                    System.out.println("Pawn cannot move forward onto a square occupied by another piece");
-                    return false;
-                }
-            }
-            //Add killed piece to white or black list of removed pieces
-            if (occupyingPiece.getColorInt() == 1) {
-                removedPiecesWhite.add(occupyingPiece);
-            }
-            else {
-                removedPiecesBlack.add(occupyingPiece);
-            }
-            //TODO: print what piece was taken
-            //Remove piece from board
-            board[desX][desY].removePiece();
-            //Update its coords
-            occupyingPiece.setCoords(10, 10);
-
-            //Remove target piece from original square
-            board[srcX][srcY].removePiece();
-            //Move target piece to dest square
-            board[desX][desY].addPiece(targetPiece);
-            //Updated piece coords
-            targetPiece.setCoords(desX, desY);
-            changeTurn();
-            return true;
-        }
-        //TODO: See if this block can be removed
-        //If move is possible and no enemy piece on destination square
-        else if (targetPiece.canMove(board, desX, desY) && !squareOccupied) {
-            //Move piece to destination square
-            board[desX][desY].addPiece(targetPiece);
-            //Updated piece coords
-            targetPiece.setCoords(desX, desY);
-            //Remove piece from previous square
-            board[srcX][srcY].removePiece();
-            changeTurn();
-            return true;
-        }
-        //Else return false and piece stays in square
         return false;
-    }*/
+    }
 }
 

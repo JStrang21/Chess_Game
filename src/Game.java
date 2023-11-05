@@ -68,41 +68,4 @@ public class Game {
 
         return false;
     }
-
-    /*public void inCheckBlock(int color, String src, String des, Scanner input) {
-        if (color == 1) {
-            System.out.println("White King in check, must get king out of check");
-            System.out.println("White player enter originating piece square: ");
-            src = input.next();
-            System.out.println("Enter destination square: ");
-            des = input.next();
-        }
-        else {
-            System.out.println("Black King in check, must get king out of check");
-            System.out.println("Black player enter originating piece square: ");
-            src = input.next();
-            System.out.println("Enter destination square: ");
-            des = input.next();
-        }
-    }
-
-    public void nonCheckBlock(int color, String src, String des, Scanner input, boolean gameWon) {
-        if (color == 1) {
-            System.out.println("White player enter originating piece square: ");
-            src = input.next();
-            System.out.println("Enter destination square: ");
-            des = input.next();
-        }
-        else {
-            System.out.println("Black player enter originating piece square: ");
-            src = input.next();
-            System.out.println("Enter destination square: ");
-            des = input.next();
-        }
-        board.movePiece(src, des);
-        board.printBoard();
-        gameWon = checkWin();
-    }
-
-     */
 }

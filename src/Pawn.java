@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Pawn extends Piece {
     String name = "Pawn";
     boolean isFirstMove = true;
@@ -63,6 +65,29 @@ public class Pawn extends Piece {
             else if (Math.abs(desX - curX) == 1 && occupyingPiece != null) {
                 return false;
             }
+            /*
+            //For pawn promotion
+            else if (Math.abs(desX - curX) == 1 && occupyingPiece == null && ((desX == 8) || (desX == 0))) {
+                Scanner input = new Scanner(System.in);
+                //If white pawn reaches opposite side
+                if (color == 1 && desX == 7) {
+                    //Ask player which piece
+                    System.out.println("Pawn promoted, type capitol first letter of desired piece: ");
+                    System.out.println("Options include: Queen, Rook, Bishop, and Knight");
+                    //char firstLetter = input.next(".").charAt(0);
+                    //TODO: make sure this works
+                    char firstLetter = 'A';
+                    while (checkFirstLetter(firstLetter)) {
+                        firstLetter = input.next(".").charAt(0);
+                    }
+
+                }
+                else if (color == 2 && desX == 0) {
+
+                }
+            }
+
+             */
             //If just moving one square
             else if (Math.abs(desX - curX) == 1) {
                 return true;
