@@ -34,6 +34,10 @@ public class Chessboard {
     }
 
     public boolean movePiece(String src, String des) {
+        if (src.length() != 2 || des.length() != 2) {
+            System.out.println("Enter correct coordinates");
+            return false;
+        }
         //String src = srcX and srcY while String des = desX and desY
         //TODO: converter is wrong?
         int[] convertedCoords = convert(src, des);
@@ -466,6 +470,10 @@ public class Chessboard {
     }
 
     public boolean movedOutOfCheck(String src, String des) {
+        if (src.length() != 2 || des.length() != 2) {
+            System.out.println("Enter correct coordinates");
+            return false;
+        }
         int[] convertedCoords = convert(src, des);
         int srcX = convertedCoords[0];
         int srcY = convertedCoords[1];
@@ -473,6 +481,9 @@ public class Chessboard {
         int desY = convertedCoords[3];
         //Check if piece selected is King, if not king check if moving that piece to des square stops check
         Piece allyPiece = board[srcX][srcY].getPiece();
+        if (allyPiece == null) {
+            return false;
+        }
         if (!allyPiece.getNameString().equals("King")) {
             //Get colors && ally king
             int allyColor = allyPiece.getColorInt();
