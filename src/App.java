@@ -1,4 +1,4 @@
-import javafx.scene.layout.GridPane;
+/*import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
+import javafx.scene.Scene;*/
 import java.util.Scanner;
 
 public class App{
