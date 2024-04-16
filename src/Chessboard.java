@@ -479,6 +479,7 @@ public class Chessboard {
         int srcY = convertedCoords[1];
         int desX = convertedCoords[2];
         int desY = convertedCoords[3];
+
         //Check if piece selected is King, if not king check if moving that piece to des square stops check
         Piece allyPiece = board[srcX][srcY].getPiece();
         if (allyPiece == null) {
@@ -498,14 +499,38 @@ public class Chessboard {
                 allyKing = getBlackKing();
             }
             //Find piece checking king
-            Piece checkingPiece = findCheckingPiece(board, allyKing, opposingColor);
-            //If allyPiece can move to square with piece checking then it will stop check
-            if (allyPiece.canMove(board, desX, desY) && desX == checkingPiece.curX && desY == checkingPiece.curY) {
+            Piece checkingPieceTemp = findCheckingPiece(board, allyKing, opposingColor);
+
+            //Can ally piece move to inputted destination square
+            boolean canAllyPieceMove = allyPiece.canMove(board, desX, desY);
+
+            //If allyPiece can move to square with piece checking then it will take piece and stop check
+            if (canAllyPieceMove && desX == checkingPieceTemp.curX && desY == checkingPieceTemp.curY) {
                 return true;
             }
-            //TODO: Check if ally piece blocks check
 
+
+
+            //TODO: Check if ally piece blocks check
         }
+
+        /*//Find piece checking king
+        Piece checkingPiece = findCheckingPiece(board, allyKing, opposingColor);
+
+        //Find all moves checkingPiece can make
+        int[][] checkingPossibleMoves = new int[30][2];
+
+        int countTwo = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (checkingPiece.canMove(board, i, j)) {
+                    checkingPossibleMoves[countTwo][0] = i;
+                    checkingPossibleMoves[countTwo][1] = j;
+                    countTwo++;
+                }
+            }
+        }*/
+
 
         //Only get to this if piece selected is king
         Piece king = board[srcX][srcY].getPiece();
@@ -578,6 +603,7 @@ public class Chessboard {
             if (coord == zeros) {
                 continue;
             }
+            //If possible move of king is different then checking piece possible move then it's safe to move king (if both match then checking piece can attack king there)
             if (!Arrays.stream(checkingPossibleMoves).anyMatch(e -> Arrays.equals(e, coord))) {
                 goodMoves[goodCount][0] = kingPossibleMoves[j][0];
                 goodMoves[goodCount][1] = kingPossibleMoves[j][1];
@@ -596,6 +622,8 @@ public class Chessboard {
 
         return false;
     }
+
+
 
     private Piece findCheckingPiece(Square[][] board, Piece king, int opposingColor ) {
         //Find piece checking king

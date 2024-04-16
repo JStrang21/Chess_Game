@@ -32,18 +32,24 @@ public class App {
         /*
         Bugs:
         -Crashes when pawn moves diagonal to space with no piece:illegal move but don't want crashing
+         TODO: When king is checked. Allow ally piece to block path of checking piece
+         //    -> Find lowest # moves to check  
          */
         //Run through game to make testing easier
         int clock = 0;
         int whiteMove = 0;
         int blackMove = 0;
-        while (clock <= 45) {
+        while (clock <= 49) {
             //While game has not been won continue game
                 String srcTest = null;
                 String desTest = null;
                 //Added moves to make testing faster
-                String[][] white = {{"a7","a5"},{"b7","b5"},{"a5","a4"},{"c7","b6"},{"b6","b5"},{"d7","d5"},{"e7","e6"},{"h7","h5"},{"e6","d5"},{"h5","g4"},{"g4","f3"},{"f3","e2"},{"h8","h2"},{"a8","a5"},{"a5","b5"},{"b5","b2"},{"e8","f7"},{"b2","d2"},{"h2","h8"},{"d2","a2"},{"a2","a8"},{"f7","e8"},{"a8","a7"}};
-                String[][] black = {{"a2","a4"},{"a4","b5"},{"b5","b6"},{"b2","b3"},{"b3","a4"},{"a4","b5"},{"c2","c4"},{"c4","d5"},{"g2","g4"},{"f2","f3"},{"a1","a7"},{"a7","f7"},{"f7","g7"},{"g7","g5"},{"g5","d5"},{"d1","e2"},{"e2","d1"},{"d5","a5"},{"a5","a1"},{"h1","h2"},{"h2","h1"},{"h1","h2"},{"h2","h1"}};
+                String[][] white = {{"a7","a5"},{"b7","b5"},{"a5","a4"},{"c7","b6"},{"b6","b5"},{"d7","d5"},{"e7","e6"},{"h7","h5"},{"e6","d5"},
+                                    {"h5","g4"},{"g4","f3"},{"f3","e2"},{"h8","h2"},{"a8","a5"},{"a5","b5"},{"b5","b2"},{"e8","f7"},{"b2","d2"},
+                                    {"h2","h8"},{"d2","a2"},{"a2","a8"},{"f7","e8"},{"a8","a7"},{"a7","a8"},{"a8","a7"}};
+                String[][] black = {{"a2","a4"},{"a4","b5"},{"b5","b6"},{"b2","b3"},{"b3","a4"},{"a4","b5"},{"c2","c4"},{"c4","d5"},{"g2","g4"},
+                                    {"f2","f3"},{"a1","a7"},{"a7","f7"},{"f7","g7"},{"g7","g5"},{"g5","d5"},{"d1","e2"},{"e2","d1"},{"d5","a5"},
+                                    {"a5","a1"}, {"h1","h2"},{"h2","h1"},{"h1","h2"},{"h2","h1"},{"d1","d5"},{"d5","b5"}};
                 //TODO: make inCheckBlock and nonCheckBlock return src and des moves to moves[]
                 String[] moves = new String[2];
                 //TODO account for wrong input: crashes when input is wrong
