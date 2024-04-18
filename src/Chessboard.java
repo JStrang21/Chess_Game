@@ -513,6 +513,7 @@ public class Chessboard {
 
             //TODO: Check if ally piece blocks check
         }
+        //TODO: make sure ally piece can move and block opposing check
 
         /*//Find piece checking king
         Piece checkingPiece = findCheckingPiece(board, allyKing, opposingColor);
