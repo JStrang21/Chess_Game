@@ -19,6 +19,7 @@ public class King extends Piece{
         }
         //Cant move into check
         if (isInCheck(b, desX, desY)) {
+
             System.out.println("Cannot move King into check");
             return false;
         }

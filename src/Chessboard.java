@@ -508,10 +508,24 @@ public class Chessboard {
             if (canAllyPieceMove && desX == checkingPieceTemp.curX && desY == checkingPieceTemp.curY) {
                 return true;
             }
-
-
-
             //TODO: Check if ally piece blocks check
+            //Make a temporary piece and place it in square where blocking piece was told to move
+            Piece temporaryBlockingPiece = new Pawn(allyPiece.getColorInt());
+            temporaryBlockingPiece.curX = desX;
+            temporaryBlockingPiece.curY = desY;
+            board[desX][desY].addPiece(temporaryBlockingPiece);
+            //Check if checking piece can still check King lol
+            boolean canCheckingStillCheck = checkingPieceTemp.canMove(board, allyKing.curX, allyKing.curY);
+            if (canCheckingStillCheck) {
+                System.out.println("Ally piece didn't block");
+                return false;
+            }
+            else {
+                System.out.println("Ally piece blocked check");
+                board[desX][desY].removePiece();;
+                temporaryBlockingPiece.removePiece();
+                return true;
+            }
         }
         //TODO: make sure ally piece can move and block opposing check
 

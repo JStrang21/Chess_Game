@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;*/
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class App {
 
@@ -33,8 +34,9 @@ public class App {
         Bugs:
         -Crashes when pawn moves diagonal to space with no piece:illegal move but don't want crashing
          TODO: When king is checked. Allow ally piece to block path of checking piece
-         //    -> Find lowest # moves to check  
+         //    -> Find lowest # moves to check
          */
+
         //Run through game to make testing easier
         int clock = 0;
         int whiteMove = 0;
