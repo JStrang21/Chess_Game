@@ -37,6 +37,7 @@ public class App {
          //    -> Find lowest # moves to check
          */
 
+        /*
         //Run through game to make testing easier
         int clock = 0;
         int whiteMove = 0;
@@ -123,7 +124,7 @@ public class App {
             }
             clock++;
         }
-
+        */
         System.out.println("Enter original piece square, space, where you want piece to move");
         System.out.println("Ex: b7 b6");
         //While game has not been won continue game
