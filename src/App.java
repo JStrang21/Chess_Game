@@ -127,6 +127,7 @@ public class App {
         */
         System.out.println("Enter original piece square, space, where you want piece to move");
         System.out.println("Ex: b7 b6");
+        g.board.printBoard();
         //While game has not been won continue game
         boolean gameWon = false;
         while (!gameWon) {
