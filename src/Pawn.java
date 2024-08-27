@@ -52,7 +52,6 @@ public class Pawn extends Piece {
             }
         }
 
-        //TODO account for diagonal move to attack enemy piece
         //TODO account for en passant
         if (desY == curY) {
             //If first move of pawn than 2 squares allowed (second condition bc only allowed when not using diagonal attack)
@@ -99,7 +98,7 @@ public class Pawn extends Piece {
             }
         }
         else {
-            //Can only go one space up in en passant
+            //Can only go one space up in diagonal
             if (Math.abs(desX - curX) == 1 && Math.abs(desY - curY) == 1 && occupyingPiece != null) {
                 isFirstMove = false;
                 diagonalAttack = true;
